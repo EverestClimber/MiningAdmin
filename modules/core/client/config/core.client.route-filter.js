@@ -14,6 +14,7 @@
     function stateChangeStart(event, toState, toParams, fromState, fromParams) {
       // Check authentication before changing state
       // if (toState.data && toState.data.roles && toState.data.roles.length > 0) {
+      if (toState) {
         var allowed = false;
 
         /* for (var i = 0, roles = toState.data.roles; i < roles.length; i++) {
@@ -44,7 +45,7 @@
             });
           }
         }
-      // }
+      }
     }
 
     function stateChangeSuccess(event, toState, toParams, fromState, fromParams) {

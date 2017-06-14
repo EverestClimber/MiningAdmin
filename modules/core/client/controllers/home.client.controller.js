@@ -227,8 +227,6 @@
     vm.init();
 
     angular.element(document).ready(function () {
-      // setTimeout(function(){ App.init(); alert('book'); }, 1000);
-      // App.init();
       $timeout(App.init);
     });
 
