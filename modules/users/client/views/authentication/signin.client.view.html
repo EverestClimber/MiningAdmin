@@ -1,0 +1,55 @@
+<!-- Login Container -->
+<div id="login-container">
+    <!-- Login Header -->
+    <h1 class="h2 text-light text-center push-top-bottom animation-slideDown">
+        <i class="fa fa-cube"></i> <strong>Welcome to LDW Monitor</strong>
+    </h1>
+    <!-- END Login Header -->
+
+    <!-- Login Block -->
+    <div class="block animation-fadeInQuickInv">
+        <!-- Login Title -->
+        <div class="block-title">
+            <div class="block-options pull-right">
+                <a href="javascript:void(0)" class="btn btn-effect-ripple btn-primary" data-toggle="tooltip" data-placement="left" title="Forgot your password?"><i class="fa fa-exclamation-circle"></i></a>
+            </div>
+            <h2>Please Login</h2>
+        </div>
+        <!-- END Login Title -->
+
+        <!-- Login Form -->
+        <form id="form-login" name="vm.userForm" ng-submit="vm.signin(vm.userForm.$valid)" class="signin form-horizontal" novalidate autocomplete="off">
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input type="text" id="usernameOrEmail" name="usernameOrEmail" class="form-control" placeholder="Your email.." ng-model="vm.credentials.usernameOrEmail" required autofocus>
+                    <div ng-messages="vm.userForm.usernameOrEmail.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Username or Email is required.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Your password.." ng-model="vm.credentials.password" required>
+                    <div ng-messages="vm.userForm.password.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Password is required.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-actions">
+                <div class="col-xs-4 text-right pull-right">
+                    <button type="submit" class="btn btn-effect-ripple btn-sm btn-primary"><i class="fa fa-check"></i> Let's Go</button>
+                </div>
+            </div>
+        </form>
+        <!-- END Login Form -->
+    </div>
+    <!-- END Login Block -->
+
+    <!-- Footer -->
+    <footer class="text-muted text-center animation-pullUp">
+        <small><span id="year-copy"></span> &copy; <a href="http://wwww.ldwmining.com" target="_blank"> LDW Mining 1.0</a></small>
+    </footer>
+    <!-- END Footer -->
+</div>
+<!-- END Login Container -->
+<script src="js/pages/readyLogin.js"></script>

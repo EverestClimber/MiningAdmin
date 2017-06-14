@@ -1,0 +1,65 @@
+<!-- Page Wrapper -->
+<!-- In the PHP version you can set the following options from inc/config file -->
+<!--
+    Available classes:
+
+    'page-loading'      enables page preloader
+-->
+<!-- <div id="page-wrapper" ng-class="{'page-loading': vm.template.page_preloader}" ng-controller="HomeController as vm"> -->
+<div id="page-wrapper" ng-class="{'page-loading': vm.template.page_preloader}" ng-controller="HomeController as vm">
+  <!-- Preloader -->
+  <!-- Preloader functionality (initialized in js/app.js) - pageLoading() -->
+  <!-- Used only if page preloader enabled from inc/config (PHP version) or the class 'page-loading' is added in #page-wrapper element (HTML version) -->
+  <div class="preloader">
+    <div class="inner">
+      <!-- Animation spinner for all modern browsers -->
+      <div class="preloader-spinner themed-background hidden-lt-ie10"></div>
+
+      <!-- Text for IE9 -->
+      <h3 class="text-primary visible-lt-ie10"><strong>Loading..</strong></h3>
+    </div>
+  </div>
+  <!-- END Preloader -->
+
+  <!-- Page Container -->
+  <!--
+      Available #page-container classes:
+
+      'sidebar-light'                                 for a light main sidebar (You can add it along with any other class)
+
+      'sidebar-visible-lg-mini'                       main sidebar condensed - Mini Navigation (> 991px)
+      'sidebar-visible-lg-full'                       main sidebar full - Full Navigation (> 991px)
+
+      'sidebar-alt-visible-lg'                        alternative sidebar visible by default (> 991px) (You can add it along with any other class)
+
+      'header-fixed-top'                              has to be added only if the class 'navbar-fixed-top' was added on header.navbar
+      'header-fixed-bottom'                           has to be added only if the class 'navbar-fixed-bottom' was added on header.navbar
+
+      'fixed-width'                                   for a fixed width layout (can only be used with a static header/main sidebar layout)
+
+      'enable-cookies'                                enables cookies for remembering active color theme when changed from the sidebar links (You can add it along with any other class)
+  -->
+
+
+  <div id="page-container" ng-class="vm.page_classes" >
+    <!--<div ng-if="vm.template['inc_sidebar_alt']" ng-include="'inc/{{vm.template.inc_sidebar_alt}}.client.view.html'"></div>-->
+    <!--<div ng-if="vm.template['inc_sidebar']" ng-include="'inc/{{vm.template.inc_sidebar}}.client.view.html'"></div>-->
+    <ng-include src="'/modules/core/client/views/inc/sidebar_alt.client.view.html'"></ng-include>
+    <ng-include src="'/modules/core/client/views/inc/sidebar.client.view.html'"></ng-include>
+
+    <!-- Main Container -->
+    <div id="main-container">
+    <!--<?php if ($template['inc_header']) { include 'inc/' . $template['inc_header'] . '.php'; } ?>-->
+      <ng-include src="'/modules/core/client/views/inc/header.client.view.html'"></ng-include>
+
+      <div id="page-content">
+        <ui-view>
+        </ui-view>
+      </div>
+
+    </div>
+    <!-- END Main Container -->
+  </div>
+  <!-- END Page Container -->
+</div>
+<!-- END Page Wrapper -->

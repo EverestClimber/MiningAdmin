@@ -1,0 +1,63 @@
+<!-- Main Sidebar -->
+<div id="sidebar">
+    <!-- Sidebar Brand -->
+    <div id="sidebar-brand" class="themed-background">
+        <a href="index.php" class="sidebar-title">
+            <i class="fa fa-cube"></i> <span class="sidebar-nav-mini-hide"><strong>LDW</strong> Mining</span>
+        </a>
+    </div>
+    <!-- END Sidebar Brand -->
+
+    <!-- Wrapper for scrolling functionality -->
+    <div id="sidebar-scroll">
+        <!-- Sidebar Content -->
+        <div class="sidebar-content">
+            <!-- Sidebar Navigation -->
+            <ul class="sidebar-nav">
+
+              <div ng-repeat="menu in vm.sidebar" ng-switch="menu.state">
+                <li ng-switch-when="separator" class="sidebar-separator">
+                    <i class="fa fa-ellipsis-h" ng-click="vm.test()"></i>
+                </li>
+                <li ng-switch-default>
+                  <a href="javascript:void(0)" ui-sref="{{menu.state}}" ng-class="{'sidebar-nav-menu': menu.sub, 'active': (vm.selectedMenuID == menu.id )}" ng-click="vm.setMenuID(menu)">
+                    <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide" ng-if="menu.sub"></i>
+                    <i class="{{menu.icon}} sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-mini-hide">{{menu.name}}</span>
+                  </a>
+
+                  <ul ng-if="menu.sub">
+                    <div ng-repeat="item in menu.sub" ng-switch="item.state">
+                      <li ng-switch-when="separator" class="sidebar-separator">
+                          <i class="fa fa-ellipsis-h"></i>
+                      </li>
+                      <li ng-switch-default>
+                        <a href="javascript:void(0)" ui-sref="{{item.state}}" ng-class="{'active': vm.selectedMenuID === item.id}" ng-click="vm.setMenuID(item)">
+                          {{item.name}}
+                        </a>
+                      </li>
+                    </div>
+                  </ul>
+                </li>
+              </div>
+
+            </ul>
+            <!-- END Sidebar Navigation -->
+
+        </div>
+        <!-- END Sidebar Content -->
+    </div>
+    <!-- END Wrapper for scrolling functionality -->
+
+    <!-- Sidebar Extra Info -->
+    <div id="sidebar-extra-info" class="sidebar-content sidebar-nav-mini-hide">
+        <div class="progress progress-mini push-bit">
+            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+        <div class="text-center">
+            <small><a href="javascript:void(0)" ui-sref="home"> © LDW Mining 1.0</a></small>
+        </div>
+    </div>
+    <!-- END Sidebar Extra Info -->
+</div>
+<!-- END Main Sidebar -->
