@@ -11,6 +11,12 @@
   function routeConfig($stateProvider) {
     // Users state routing
     $stateProvider
+      .state('lock', {
+        url: '/lock',
+        templateUrl: '/modules/users/client/views/lock.client.view.html',
+        controller: 'LockController',
+        controllerAs: 'vm'
+      })
       .state('settings', {
         abstract: true,
         url: '/settings',

@@ -25,7 +25,9 @@
         } */
 
         if (Authentication.user) {
-          allowed = true;
+          if (!Authentication.user.lock) {
+            allowed = true;
+          }
         }
 
         if (toState.data) {
@@ -38,6 +40,11 @@
           event.preventDefault();
           if (Authentication.user !== null && typeof Authentication.user === 'object') {
             $state.transitionTo('forbidden');
+          } else if (Authentication.user && Authentication.user.lock) {
+            $state.go('lock').then(function () {
+              // Record previous state
+              storePreviousState(toState, toParams);
+            });
           } else {
             $state.go('authentication.signin').then(function () {
               // Record previous state

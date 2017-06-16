@@ -77,7 +77,7 @@
       vm.sidebar = [
         {
           name: 'Dashboard',
-          state: 'home.dashboard',
+          state: 'home.machines({state: "all"})',
           icon: 'gi gi-compass',
           id: 0
         },
@@ -87,17 +87,17 @@
           sub: [
             {
               name: 'Online',
-              state: 'index.php?status=online',
+              state: 'home.machines({state: "online"})',
               id: 10
             },
             {
               name: 'Offline',
-              state: 'index.php?status=offline',
+              state: 'home.machines({state: "offline"})',
               id: 11
             },
             {
               name: 'All',
-              state: 'index.php?status=all',
+              state: 'home.machines({state: "all"})',
               id: 12
             }
           ]

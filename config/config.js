@@ -178,8 +178,8 @@ var initViewTemplate = function (config) {
     version: '1.0',
     author: 'LDW-Communications',
     robots: 'noindex, nofollow',
-    title: 'LDW Total Mining Sollutions',
-    description: 'LDW Mining Sollutions',
+    title: 'LDW Total Mining Solutions',
+    description: 'LDW Mining Solutions',
     // '', 'classy', 'social', 'flat', 'amethyst', 'creme', 'passion'
     theme: 'social'
   };

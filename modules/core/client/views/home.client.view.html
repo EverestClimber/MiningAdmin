@@ -6,7 +6,7 @@
     'page-loading'      enables page preloader
 -->
 <!-- <div id="page-wrapper" ng-class="{'page-loading': vm.template.page_preloader}" ng-controller="HomeController as vm"> -->
-<div id="page-wrapper" ng-class="{'page-loading': vm.template.page_preloader}" ng-controller="HomeController as vm">
+<div id="page-wrapper" ng-class="{'page-loading': vm.template.page_preloader}">
   <!-- Preloader -->
   <!-- Preloader functionality (initialized in js/app.js) - pageLoading() -->
   <!-- Used only if page preloader enabled from inc/config (PHP version) or the class 'page-loading' is added in #page-wrapper element (HTML version) -->
@@ -53,8 +53,8 @@
       <ng-include src="'/modules/core/client/views/inc/header.client.view.html'"></ng-include>
 
       <div id="page-content">
-        <ui-view>
-        </ui-view>
+        <div ui-view>
+        </div>
       </div>
 
     </div>

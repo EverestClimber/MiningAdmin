@@ -34,11 +34,6 @@
         controller: 'HomeController',
         controllerAs: 'vm'
       })
-      .state('home.dashboard', {
-        url: 'dashboard',
-        templateUrl: '/modules/core/client/views/dashboard-home.client.view.html',
-
-      })
       .state('not-found', {
         url: '/not-found',
         templateUrl: '/modules/core/client/views/404.client.view.html',
