@@ -1,0 +1,150 @@
+<div class="content-header">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="header-section">
+				<h1>Sgminer Flags for {{ vm.user.displayName }}</h1>
+			</div>
+		</div>
+		<div class="col-sm-6 hidden-xs">
+			<div class="header-section">
+				<ul class="breadcrumb breadcrumb-top">
+					<li>Sgminer flags</li>
+					<li><a href="">{{ vm.user.displayName }}</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="block-title">
+		<h2>Change sgminer flags</h2>
+	</div>
+	<div class="row text-center">
+		<div class="block-section">
+		</div>
+	</div>
+
+	<div id="faq1" class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="worksize-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#worksize" ng-click="vm.setState('worksize')">
+						<strong>Change Worksize</strong>
+					</a>
+				</div>
+			</div>
+			<div id="worksize" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="worksize-form" ng-submit="vm.setWorkSize()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Sgminer worksize</label>
+							<span class="form-control" disabled>{{ vm.sgminerWorksize() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Sgminer worksize</label>
+							<input ng-model="vm.input.worksize" type="text" pattern="^[0-9]*$" class="form-control" name="newWorksize" minlength="1" maxlength="3" data-error="That's not a correct number">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group">
+							<label for="example-nf-password">Current Sgminer XMR worksize</label>
+							<span class="form-control" disabled>{{ vm.sgminerXMRWorkSize() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Sgminer XMR worksize</label>
+							<input ng-model="vm.input.xmrWorksize" type="text" pattern="^[0-9]*$" class="form-control" name="newWorksizeXMR" minlength="1" maxlength="3" data-error="That's not a correct number">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="intensity-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#intensity" ng-click="vm.setState('intensity')">
+						<strong>Change Intensity</strong>
+					</a>
+				</div>
+			</div>
+			<div id="intensity" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="intensity-form" ng-submit="vm.setIntensity()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Sgminer XIntensity</label>
+							<span class="form-control" disabled>{{ vm.sgminerIntensity() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Sgminer XIntensity</label>
+							<input ng-model="vm.input.intensity" type="text" pattern="^[0-9]*$" class="form-control" name="newIntensity" minlength="1" maxlength="4" data-error="That's not a correct number">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group">
+							<label for="example-nf-password">Current Sgminer XMR RawIntensity</label>
+							<span class="form-control" disabled>{{ vm.sgminerXMRIntensity(); }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Sgminer XMR RawIntensity</label>
+							<input ng-model="vm.input.xmrIntensity" type="text" pattern="^[0-9]*$" class="form-control" name="newIntensityXMR" minlength="1" maxlength="4" data-error="That's not a correct number">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="threads-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#threads" ng-click="vm.setState('threads')">
+						<strong>Change Threads</strong>
+					</a>
+				</div>
+			</div>
+			<div id="threads" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="threads-form" ng-submit="vm.setThreads()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Sgminer GPU Threads</label>
+							<span class="form-control" disabled>{{ vm.sgminerThreads() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Sgminer GPU threads</label>
+							<input ng-model="vm.input.threads" type="text" pattern="^[0-9]*$" class="form-control" name="newThreads" minlength="1" maxlength="1" data-error="That's not a correct number">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group">
+							<label for="example-nf-password">Current Sgminer XMR GPU threads</label>
+							<span class="form-control" disabled>{{ vm.sgminerXMRThreads() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Sgminer XMR GPU threads</label>
+							<input ng-model="vm.input.xmrThreads" type="text" pattern="^[0-9]*$" class="form-control" name="newThreadsXMR" minlength="1" maxlength="1" data-error="That's not a correct number">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

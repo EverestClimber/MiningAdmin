@@ -20,7 +20,7 @@
                     <i class="fa fa-ellipsis-h" ng-click="vm.test()"></i>
                 </li>
                 <li ng-switch-default>
-                  <a href="javascript:void(0)" ui-sref="{{menu.state}}" ng-class="{'sidebar-nav-menu': menu.sub, 'active': (vm.selectedMenuID == menu.id )}" ng-click="vm.setMenuID(menu)">
+                  <a href="javascript:void(0)" ui-sref="{{menu.state}}" ng-class="{ 'sidebar-nav-menu': menu.sub, 'active': vm.menuState() === menu.state }">
                     <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide" ng-if="menu.sub"></i>
                     <i class="{{menu.icon}} sidebar-nav-icon"></i>
                     <span class="sidebar-nav-mini-hide">{{menu.name}}</span>
@@ -32,7 +32,7 @@
                           <i class="fa fa-ellipsis-h"></i>
                       </li>
                       <li ng-switch-default>
-                        <a href="javascript:void(0)" ui-sref="{{item.state}}" ng-class="{'active': vm.selectedMenuID === item.id}" ng-click="vm.setMenuID(item)">
+                        <a href="javascript:void(0)" ui-sref="{{item.state}}" ng-class="{ 'active': vm.menuState() === item.state }">
                           {{item.name}}
                         </a>
                       </li>

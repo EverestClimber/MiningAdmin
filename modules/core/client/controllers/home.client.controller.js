@@ -11,8 +11,6 @@
     var vm = this;
     vm.user = Authentication.user;
 
-    vm.selectedMenuID = 0;
-
     vm.template = {
       // true                         enable page preloader
       // false                        disable page preloader
@@ -77,9 +75,8 @@
       vm.sidebar = [
         {
           name: 'Dashboard',
-          state: 'home.machines({state: "all"})',
-          icon: 'gi gi-compass',
-          id: 0
+          state: 'home.machines({ state: "dashboard" })',
+          icon: 'gi gi-compass'
         },
         {
           name: 'Toggle Status',
@@ -87,18 +84,15 @@
           sub: [
             {
               name: 'Online',
-              state: 'home.machines({state: "online"})',
-              id: 10
+              state: 'home.machines({ state: "online" })'
             },
             {
               name: 'Offline',
-              state: 'home.machines({state: "offline"})',
-              id: 11
+              state: 'home.machines({ state: "offline" })'
             },
             {
               name: 'All',
-              state: 'home.machines({state: "all"})',
-              id: 12
+              state: 'home.machines({ state: "all" })'
             }
           ]
         },
@@ -111,28 +105,23 @@
           sub: [
             {
               name: 'Global Core Clock',
-              state: 'globalminer.php?page=core',
-              id: 20
+              state: 'home.miner-settings({ state: "core-clock" })'
             },
             {
               name: 'Global Memory Clock',
-              state: 'globalminer.php?page=mem',
-              id: 21
+              state: 'home.miner-settings({ state: "memory-clock" })'
             },
             {
               name: 'Global Fan Speed',
-              state: 'globalminer.php?page=fan',
-              id: 22
+              state: 'home.miner-settings({ state: "fan-speed" })'
             },
             {
               name: 'Global Power Settings',
-              state: 'globalminer.php?page=power',
-              id: 23
+              state: 'home.miner-settings({ state: "power" })'
             },
             {
               name: 'Mass Reboot',
-              state: 'globalminer.php?page=massreb',
-              id: 24
+              state: 'home.miner-settings({ state: "mass-reboot" })'
             }
           ]
         },
@@ -142,18 +131,15 @@
           sub: [
             {
               name: 'Global Wallet',
-              state: 'global.php?page=wallet',
-              id: 30
+              state: 'home.pool-settings({ state: "wallet" })'
             },
             {
               name: 'Global Pool',
-              state: 'global.php?page=pool',
-              id: 31
+              state: 'home.pool-settings({ state: "pool" })'
             },
             {
               name: 'Global Miner',
-              state: 'global.php?page=miner',
-              id: 32
+              state: 'home.pool-settings({ state: "miner" })'
             }
           ]
         },
@@ -163,13 +149,11 @@
           sub: [
             {
               name: 'Create Groups',
-              state: 'creategroups.php',
-              id: 40
+              state: 'creategroups.php'
             },
             {
               name: 'Manage Groups',
-              state: 'managegroups.php',
-              id: 41
+              state: 'managegroups.php'
             }
           ]
         },
@@ -179,18 +163,15 @@
           sub: [
             {
               name: 'Worksize',
-              state: 'flags.php?page=worksize',
-              id: 50
+              state: 'home.flag-settings({ state: "worksize" })'
             },
             {
               name: 'Intensity',
-              state: 'flags.php?page=intensity',
-              id: 51
+              state: 'home.flag-settings({ state: "intensity" })'
             },
             {
               name: 'Threads',
-              state: 'flags.php?page=threads',
-              id: 52
+              state: 'home.flag-settings({ state: "threads" })'
             }
           ]
         },
@@ -200,22 +181,22 @@
           sub: [
             {
               name: 'Claymore Zec Mode',
-              state: 'clayflags.php?page=mode',
-              id: 60
+              state: 'home.claymore-settings({ state: "zec-mode" })'
             },
             {
               name: 'Intensity',
-              state: 'clayflags.php?page=intensity',
-              id: 61
+              state: 'home.claymore-settings({ state: "intensity" })'
             }
           ]
         }
       ];
     };
 
-    vm.setMenuID = function(item) {
-      if (item.sub === undefined) {
-        vm.selectedMenuID = item.id;
+    vm.menuState = function() {
+      if ($state.params.state) {
+        return `${$state.current.name}({ state: "${$state.params.state}" })`;
+      } else {
+        return `${$state.current.name}`;
       }
     };
 
@@ -227,7 +208,7 @@
     vm.init();
 
     angular.element(document).ready(function () {
-      $timeout(App.init);
+      $timeout(App.init, 300);
     });
 
   }

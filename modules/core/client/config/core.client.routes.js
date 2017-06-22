@@ -28,7 +28,6 @@
 
     $stateProvider
       .state('home', {
-        abstract: true,
         url: '/',
         templateUrl: '/modules/core/client/views/home.client.view.html',
         controller: 'HomeController',

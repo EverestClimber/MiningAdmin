@@ -18,6 +18,10 @@ var MachineSchema = new Schema({
     type: String,
     default: ''
   },
+  updated: {
+    type: Number,
+    default: Date.now()
+  },
   info: {
     allowed: Number,
     overheat: Number,
@@ -39,7 +43,7 @@ var MachineSchema = new Schema({
     drive_name: String,
     freespace: Number,
     temp: String,
-    version: String,
+    version: Number,
     miner_secs: Number,
     adl_error: String,
     proxy_problem: String,
@@ -51,10 +55,10 @@ var MachineSchema = new Schema({
     alive: Number,
     driver: String,
     wrong_driver: String,
-    gpus: String,
+    gpus: Number,
     fanrpm: String,
     fanpercent: String,
-    hash: String,
+    hash: Number,
     miner: String,
     miner_hashes: String,
     models: String,

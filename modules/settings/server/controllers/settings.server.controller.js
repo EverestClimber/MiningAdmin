@@ -5,7 +5,7 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Machine = mongoose.model('Machine'),
+  Setting = mongoose.model('Setting'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
@@ -27,20 +27,19 @@ exports.create = function (req, res) {
 };
 
 /**
- * Read the machine with userName and hostName
+ * Read the Setting with userName
  */
 exports.read = function (req, res) {
   var userName = req.params.userName;
-  var hostName = req.params.hostName;
 
-  Machine.findOne({ user: userName, host: hostName })
-    .then(machine => {
-      if (!machine) {
+  Setting.findOne({ user: userName })
+    .then(setting => {
+      if (!setting) {
         res.status(404).send({
-          message: 'No machine with that host name has been found'
+          message: 'No setting with that user name has been found'
         });
       } else {
-        res.json(machine.toJSON());
+        res.json(setting.toJSON());
       }
     })
     .catch(err => {
@@ -55,27 +54,25 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var userName = req.params.userName;
-  var hostName = req.params.hostName;
   var info = req.body.info;
 
-  Machine.findOne({ user: userName, host: hostName })
-    .then(machine => {
-      if (!machine) {
-        var newMachine = new Machine({
+  Setting.findOne({ user: userName })
+    .then(setting => {
+      if (!setting) {
+        var newSetting = new Setting({
           user: userName,
-          host: hostName,
           updated: Date.now(),
           info: info
         });
-        return newMachine.save();
+        return newSetting.save();
       } else {
-        machine.updated = Date.now();
-        machine.info = req.body.info;
-        return machine.save();
+        setting.updated = Date.now();
+        setting.info = req.body.info;
+        return setting.save();
       }
     })
-    .then(machine => {
-      res.json(machine.toJSON());
+    .then(setting => {
+      res.json(setting.toJSON());
     })
     .catch(err => {
       return res.status(422).send({
@@ -100,19 +97,4 @@ exports.delete = function (req, res) {
       res.json(article);
     }
   });*/
-};
-
-/**
- * List of Machines of User
- */
-exports.list = function (req, res) {
-  var userName = req.params.userName;
-
-  Machine.find({ user: userName }).sort('host')
-    .then(machines => res.json(machines))
-    .catch(err => {
-      return res.status(422).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    });
 };

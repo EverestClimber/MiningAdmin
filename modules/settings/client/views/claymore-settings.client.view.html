@@ -1,0 +1,101 @@
+<div class="content-header">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="header-section">
+				<h1>Claymore Settings for {{ vm.user.displayName }}</h1>
+			</div>
+		</div>
+		<div class="col-sm-6 hidden-xs">
+			<div class="header-section">
+				<ul class="breadcrumb breadcrumb-top">
+					<li>Claymore Settings</li>
+					<li><a href="">{{ vm.user.displayName }}</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="block-title">
+		<h2>Change Claymore Settings</h2>
+	</div>
+	<div class="row text-center">
+		<div class="block-section">
+
+		</div>
+	</div>
+
+	<div id="faq1" class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+						<a id="zec-mode-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#zec-mode" ng-click="vm.setState('zec-mode')">
+							<strong>Change Claymore Mode (ZEC)</strong>
+						</a>
+				</div>
+			</div>
+			<div id="zec-mode" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="zec-mode-form" ng-submit="vm.setClayZecMode()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Claymore Mode</label>
+							<span class="form-control" disabled>{{ vm.clayZecMode() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Claymore Mode(set 1 to use old version)</label>
+							<input ng-model="vm.input.clayZecMode" type="text" pattern="^[0-1]*$" class="form-control" name="newClayZecMode" minlength="1" maxlength="1" data-error="That's not a correct number">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="intensity-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#intensity" ng-click="vm.setState('intensity')">
+						<strong>Change Intensity</strong>
+					</a>
+				</div>
+			</div>
+			<div id="intensity" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="intensity-form" ng-submit="vm.setIntensity()" method="post" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Claymore Intensity</label>
+							<span class="form-control" disabled>{{ vm.intensity() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Claymore Intensity</label>
+							<input ng-model="vm.input.intensity" type="text" pattern="^[0-9]*$" class="form-control" name="newIntensityClay" minlength="1" maxlength="1" data-error="That's not a correct number" required>
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group">
+							<label for="example-nf-password">Current Claymore ZEC Intensity</label>
+							<span class="form-control" disabled>{{ vm.zecIntensity() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Claymore ZEC Intensity</label>
+							<input ng-model="vm.input.zecIntensity" type="text" pattern="^[0-9]*$" class="form-control" name="newIntensityClayZec" minlength="1" maxlength="1" data-error="That's not a correct number" required>
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

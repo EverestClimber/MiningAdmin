@@ -13,11 +13,11 @@
                 <form action="index.php" method="post" class="form-control-borderless" onsubmit="return false;">
                     <div class="form-group">
                         <label for="side-profile-name">Name</label>
-                        <input type="text" id="side-profile-name" name="side-profile-name" class="form-control" value="John Doe">
+                        <input ng-model="vm.user.username" type="text" id="side-profile-name" name="side-profile-name" class="form-control" value="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="side-profile-email">Email</label>
-                        <input type="email" id="side-profile-email" name="side-profile-email" class="form-control" value="john.doe@example.com">
+                        <input ng-model="vm.user.email" type="email" id="side-profile-email" name="side-profile-email" class="form-control" value="john.doe@example.com">
                     </div>
                     <div class="form-group">
                         <label for="side-profile-password">New Password</label>

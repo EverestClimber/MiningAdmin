@@ -1,0 +1,201 @@
+<div class="content-header">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="header-section">
+				<h1>Global Pool Settings for {{ vm.user.displayName }}</h1>
+			</div>
+		</div>
+		<div class="col-sm-6 hidden-xs">
+			<div class="header-section">
+				<ul class="breadcrumb breadcrumb-top">
+					<li>Global Pool Settings</li>
+					<li><a href="">{{ vm.user.displayName }}</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="block-title">
+		<h2>Change Global Pool Settings</h2>
+	</div>
+	<div class="row text-center">
+		<div class="block-section">
+
+		</div>
+	</div>
+
+	<div id="faq1" class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="wallet-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#wallet" ng-click="vm.setState('wallet')">
+						<strong>Change Global Wallet</strong>
+					</a>
+				</div>
+			</div>
+			<div id="wallet" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="wallet-form" ng-submit="vm.setWallet()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Global Wallet</label>
+							<span class="form-control" disabled>{{ vm.wallet() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Global Wallet</label>
+							<input type="text" class="form-control" name="newWallet" minlength="10" data-error="You don't need a wallet?" required ng-model="vm.input.wallet">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+						<a id="pool-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#pool" ng-click="vm.setState('pool')">
+							<strong>Change Global Pool</strong>
+						</a>
+				</div>
+			</div>
+			<div id="pool" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="pool-form" ng-submit="vm.setPool()" class="form-bordered" data-toggle="validator">
+						<div class="form-group">
+							<label for="example-nf-password">Current Global Pool</label>
+							<span class="form-control" disabled>{{ vm.globalPool() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Global Pool</label>
+							<input type="text" class="form-control" name="newPool" minlength="10" data-error="That isn't a pool address..?" required ng-model="vm.input.globalPool">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group">
+							<label for="example-nf-password">Current Backup Pool</label>
+							<span class="form-control" disabled>{{ vm.backupPool() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Backup Pool</label>
+							<input type="text" class="form-control" name="newPool2" minlength="10" data-error="That isn't a pool address..?" ng-model="vm.input.backupPool">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="miner-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#miner" ng-click="vm.setState('miner')">
+						<strong>Change Global Miner</strong>
+					</a>
+				</div>
+			</div>
+			<div id="miner" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="miner-form" class="form-bordered" ng-submit="vm.setGlobalMiner()">
+						<div class="form-group">
+							<label>Current active miner</label>
+							<span class="form-control" disabled>{{ vm.globalMiner() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label class="control-label">Select a new miner</label>
+							<div class="selectContainer">
+								<select class="form-control" name="miner" data-error="Please select a miner" required ng-model="vm.input.globalMiner">
+									<option value="">Choose a miner</option>
+									<option value="claymore">Claymore Ethereum</option>
+									<option value="claymore-xmr" disabled>Claymore XMR</option>
+									<option value="claymore-zec">Claymore Zcash</option>
+									<option value="ethminer">Genoil Ethminer</option>
+									<option value="optiminer-zcash">Optiminer Zcash</option>
+									<option value="sgminer-gm">Sgminer Ethereum</option>
+									<option value="sgminer-gm-xmr">Sgminer XMR</option>
+								</select>
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+								<div class="help-block with-errors"></div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label>Current active pool</label>
+							<span class="form-control" disabled>{{ vm.globalPool() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label class="control-label">New Pool</label>
+							<div class="">
+								<input ng-model="vm.input.globalPool" type="text" pattern="[-a-zA-Z0-9@:%._\+\/\/~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&=]*)" class="form-control" name="newPool" minlength="7" data-error="Is that a valid pooladdres?" required>
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Current backup pool</label>
+								<span class="form-control" disabled>{{ vm.backupPool() }}</span>
+							</div>
+							<div class="form-group has-feedback">
+								<label class="control-label">New Backup Pool</label>
+								<div class="">
+									<input ng-model="vm.input.backupPool" type="text" pattern="[-a-zA-Z0-9@:%._\+\/\/~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&=]*)" class="form-control" name="newPool2" minlength="7" data-error="Is that a valid pooladdres?" required>
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Current active wallet</label>
+								<span class="form-control" disabled>{{ vm.wallet() }}</span>
+
+							</div>
+							<div class="form-group has-feedback">
+								<label class="control-label">New Wallet</label>
+								<div class="">
+									<input ng-model="vm.input.wallet" type="text" class="form-control" name="wallet" minlength="10" data-error="You don't need a wallet?" required>
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label">Current active pass</label>
+								<span class="form-control" disabled>{{ vm.pass1() }}</span>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label">New pass</label>
+								<input ng-model="vm.input.poolPass1" type="text" class="form-control" name="pass" />
+							</div>
+							<div class="form-group">
+								<label class="control-label">Current secondary pool pass</label>
+								<span class="form-control" disabled>{{ vm.pass2() }}</span>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label">New secondary pool pass</label>
+								<input ng-model="vm.input.poolPass2" type="text" class="form-control" name="pass2" />
+							</div>
+							<div class="form-group form-actions">
+								<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+								<button type="reset" class="btn btn-effect-ripple btn-danger" data-dismiss="modal">Close</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

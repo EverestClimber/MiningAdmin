@@ -11,7 +11,7 @@
 
     $stateProvider
       .state('home.machines', {
-        url: ':state',
+        url: 'machines/:state',
         templateUrl: '/modules/machines/client/views/machines.client.view.html',
         controller: 'MachinesController',
         controllerAs: 'vm',

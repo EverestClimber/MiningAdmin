@@ -19,24 +19,24 @@
 							<div class="widget-content">
 								<div class="row text-center">
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Total Rigs</small><br><a href="?status=all" class="themed-color-flat"><?php echo $count; ?></a></h4>
+										<h4 class="widget-heading"><small>Total Rigs</small><br><a href="?status=all" class="themed-color-flat">{{ vm.dashboard.rig.totalCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Total Online</small><br><a href="?status=online" class="themed-color-flat"><?php echo $countOn; ?></a></h4>
+										<h4 class="widget-heading"><small>Total Online</small><br><a href="?status=online" class="themed-color-flat">{{ vm.dashboard.rig.onlineCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Total Offline</small><br><a href="?status=offline" class="themed-color-passion"><?php echo $countOff; ?></a></h4>
+										<h4 class="widget-heading"><small>Total Offline</small><br><a href="?status=offline" class="themed-color-passion">{{ vm.dashboard.rig.offlineCount }}</a></h4>
 									</div>
 								</div>
 								<div class="row text-center">
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Rigs on ETH</small><br><a href="#" class="themed-color-flat"><?php if ($countOneth !== 0){ echo $countOneth; } else { echo "0"; } ?></a></h4>
+										<h4 class="widget-heading"><small>Rigs on ETH</small><br><a href="#" class="themed-color-flat">{{ vm.dashboard.rig.ethCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Rigs on XMR</small><br><a href="#" class="themed-color-flat"><?php if ($countOnxmr !== 0){ echo $countOnxmr; } else { echo "0"; } ?></a></h4>
+										<h4 class="widget-heading"><small>Rigs on XMR</small><br><a href="#" class="themed-color-flat">{{ vm.dashboard.rig.xmrCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Rigs on ZEC</small><br><a href="#" class="themed-color-flat"><?php if ($countOnzec !== 0){ echo $countOnzec; } else { echo "0"; } ?></a></h4>
+										<h4 class="widget-heading"><small>Rigs on ZEC</small><br><a href="#" class="themed-color-flat">{{ vm.dashboard.rig.zecCount }}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -50,13 +50,13 @@
 							<div class="widget-content">
 								<div class="row text-center">
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Total</small><br><a href="javascript:void(0)" class="themed-color-flat"><?php echo $gpus; ?></a></h4>
+										<h4 class="widget-heading"><small>Total</small><br><a href="javascript:void(0)" class="themed-color-flat">{{ vm.dashboard.gpu.totalCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Active</small><br><a href="javascript:void(0)" class="themed-color-flat"><?php echo $activeGpus; ?></a></h4>
+										<h4 class="widget-heading"><small>Active</small><br><a href="javascript:void(0)" class="themed-color-flat">{{ vm.dashboard.gpu.onlineCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Inactive</small><br><a href="javascript:void(0)" class="themed-color-passion"><?php echo $deadGpus; ?></a></h4>
+										<h4 class="widget-heading"><small>Inactive</small><br><a href="javascript:void(0)" class="themed-color-passion">{{ vm.dashboard.gpu.offlineCount }}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -70,24 +70,24 @@
 							<div class="widget-content">
 								<div class="row text-center">
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Total</small><br><a href="javascript:void(0)" class="themed-color-flat"><?php echo $hash; ?></a></h4>
+										<h4 class="widget-heading"><small>Total</small><br><a href="javascript:void(0)" class="themed-color-flat">{{ vm.dashboard.hash.totalCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Last 10min</small><br><a href="javascript:void(0)" class="themed-color-flat"><?php echo $activeHash; ?></a></h4>
+										<h4 class="widget-heading"><small>Last 10min</small><br><a href="javascript:void(0)" class="themed-color-flat">{{ vm.dashboard.hash.onlineCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Offline Hash</small><br><a href="javascript:void(0)" class="themed-color-passion"><?php echo $deadHash; ?></a></h4>
+										<h4 class="widget-heading"><small>Offline Hash</small><br><a href="javascript:void(0)" class="themed-color-passion">{{ vm.dashboard.hash.offlineCount }}</a></h4>
 									</div>
 								</div>
 								<div class="row text-center">
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Total Hash ETH</small><br><a href="#" class="themed-color-flat"><?php if ($activeHasheth !== 0){ echo $activeHasheth; } else { echo "0"; } ?></a></h4>
+										<h4 class="widget-heading"><small>Total Hash ETH</small><br><a href="#" class="themed-color-flat">{{ vm.dashboard.hash.ethCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Total Hash XMR</small><br><a href="#" class="themed-color-flat"><?php if ($activeHashxmr !== 0){ echo $activeHashxmr; } else { echo "0"; } ?></a></h4>
+										<h4 class="widget-heading"><small>Total Hash XMR</small><br><a href="#" class="themed-color-flat">{{ vm.dashboard.hash.xmrCount }}</a></h4>
 									</div>
 									<div class="col-xs-4">
-										<h4 class="widget-heading"><small>Total Hash ZEC</small><br><a href="#" class="themed-color-flat"><?php if ($activeHashzec !== 0){ echo $activeHashzec; } else { echo "0"; } ?></a></h4>
+										<h4 class="widget-heading"><small>Total Hash ZEC</small><br><a href="#" class="themed-color-flat">{{ vm.dashboard.hash.zecCount }}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -100,12 +100,14 @@
 		  <div class="panel-footer"></div>
 		</div>
   </div>
-
-
 </div>
 
 <div class="block full">
   <!-- Table Styles Content -->
+  <div class="block-title text-center" ng-if=" vm.user.username === 'Test' ">
+    <h2>Welcome to LDW Mining Manager, this is a Demo account, this means you are not able to change anything.</h2><br>
+    <h2>In order to unlock all features, please send an email to ldwcommun@gmail.com or pm me on bitcointalk (Eliovp).</h2><br>
+  </div>
   <div class="table-responsive">
       <!--
       Available Table Classes:
@@ -135,52 +137,70 @@
           </tr>
         </thead>
         <tbody>
-          <tr class='danger' style='font-size: small;'>
-            <td align="center" valign="middle">
-              <span class="success">
-                <a href="rig.php?mac=&ip=&miner=&rename=yes" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Active miner: " class="danger">
-                </a>
-              <span>
-            </td>
+          <tr ng-repeat="machine in vm.machines" ng-if="(vm.machineState === 'online' && machine.online === true) || (vm.machineState === 'offline' && machine.online === false) || vm.machineState === 'all'"
+          ng-class="machine.display.trClass" style='font-size: small;'>
 
             <td align="center" valign="middle">
-              <span class="label label-danger">
-                Offline!
-              <span>
-            </td>
-
-            <td align="center" valign="middle">
-            </td>
-
-            <td align="center" valign="middle">
-              <span class="danger">
-                <a href="#" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Last seen: May 29 21:06:27" class="danger">
-                  00:00:00
+              <span class="success" data-toggle="tooltip" data-container="body" data-html="true" title="Active miner: {{ machine.display.miner }} <br>Group: {{ machine.display.group }} <br />Wallet: t1cesdj5WMe8K6tYKobNp1qufxWeMNSRJXt<br />Pool1: {{ machine.display.pool1 }}<br>Pool2: {{ machine.display.pool2 }}">
+                <a href="rename.php?mac='.$json["mac"].'&ip='.$json["ip"].'&miner='.$json["hostname"].'&rename=yes" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="modal" data-target="#renameModal" class="danger">
+                  {{ machine.info.hostname }}
                 </a>
               </span>
             </td>
 
             <td align="center" valign="middle">
-              <a tabindex="0" href="#" class="btn btn-dark-flat btn-effect-ripple btn-xs" role="button" data-html="true" data-toggle="popover" data-trigger="focus" title="<span> </span>">
+              <span class="label {{ machine.display.statusClass }}" data-toggle="{{ machine.online ? 'tooltip' : '' }}" title="CPU Mining: {{ machine.display.cpuMiner }}">
+                {{ machine.display.status }}
+              <span>
+            </td>
+
+            <td align="center" valign="middle">
+              <span class="success" ng-if="machine.online == true">
+                <a href="ip.php?mac='.$json["mac"].'&naam='.$json["hostname"].'&ip=new" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Click to give me a static ip" class="danger">
+                  {{ machine.info.ip }}
+                </a>
+              </span>
+              <span ng-if="machine.online == false">{{ machine.info.ip }}</span>
+            </td>
+
+
+            <td align="center" valign="middle">
+              <span class="danger">
+                <a href="#" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Last seen: May 29 21:06:27" class="danger">
+
+                </a>
+              </span>
+            </td>
+
+            <td align="center" valign="middle">
+              <a href="#" data-toggle="tooltip" data-container="body" data-html="true" title="<span>{{ machine.display.model }}</span>" class="btn btn-dark-flat btn-effect-ripple btn-xs">
+                {{ machine.info.gpus }}
               </a>
             </td>
 
             <td align="center" valign="middle">
-              <a href="#" class="btn btn-danger btn-xs" disabled>
+              <a href="#" ng-if="!machine.info.hash" class="btn btn-danger btn-xs" disabled>
                 Hardware Issues!
               </a>
+              <span ng-if="machine.info.hash">{{ machine.info.miner_hashes }}</span>
             </td>
+
             <td align="center" valign="middle">
               <a href="../generatechart.php?miner=" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-target="#chartModal" data-toggle="modal">
+                {{ machine.info.hash }} {{ machine.display.hashUnit }}
               </a>
             </td>
             <td align="center" valign="middle">
+              {{ machine.display.group }}
             </td>
             <td align="center" valign="middle">
+              {{ machine.info.temp }}
             </td>
             <td align="center" valign="middle">
+              {{ machine.info.fanpercent }}
             </td>
             <td align="center" valign="middle">
+              {{ machine.info.version }}
             </td>
             <td align="center" valign="middle" class="text-center" width="10%" cellpadding="0" cellspacing="0">
               <a href="minerlog.php?miner=" data-toggle="modal" data-target="#logModal" class="btn btn-effect-ripple btn-xs btn-danger" ><span data-toggle="tooltip" title="Miner Log" data-placement="top"><i class="fa fa-file-text-o"></i></span></a>

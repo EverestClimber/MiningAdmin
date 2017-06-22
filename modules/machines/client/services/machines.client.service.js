@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  // Users service used for communicating with the users REST endpoint
+  // Machines service used for communicating with the machines REST endpoint
   angular
     .module('machines.services')
     .factory('MachinesService', MachinesService);

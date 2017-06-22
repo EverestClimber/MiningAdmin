@@ -1,0 +1,61 @@
+.popover {
+  color: rgb(255, 255, 255);
+  background-color: black;
+  max-width: 100%
+}
+.input-group-addon.primary {
+  color: rgb(255, 255, 255);
+  background-color: rgb(50, 118, 177);
+  border-color: rgb(40, 94, 142);
+}
+.input-group-addon.success {
+  color: rgb(255, 255, 255);
+  background-color: rgb(92, 184, 92);
+  border-color: rgb(76, 174, 76);
+}
+.input-group-addon.info {
+  color: rgb(255, 255, 255);
+  background-color: rgb(57, 179, 215);
+  border-color: rgb(38, 154, 188);
+}
+.input-group-addon.warning {
+  color: rgb(255, 255, 255);
+  background-color: rgb(240, 173, 78);
+  border-color: rgb(238, 162, 54);
+}
+.input-group-addon.danger {
+  color: rgb(255, 255, 255);
+  background-color: rgb(217, 83, 79);
+  border-color: rgb(212, 63, 58);
+}
+  #bootstrapSelectForm .selectContainer .form-control-feedback {
+    /* Adjust feedback icon position */
+    right: -15px;
+  }
+  #ex1Slider .slider-selection {
+  background: #BABABA;
+}
+.navbar-hashrate {
+  text-align:center;
+  width: 500px;
+  transform: translateX(-50%);
+  padding-top:12px;
+  left: 50%;
+  color: white;
+  position: absolute;
+}
+.navbar-rigs {
+  text-align:center;
+  width: 500px;
+  transform: translateX(-50%);
+  left: 50%;
+  padding-top:25px;
+  color: white;
+  position: absolute;
+}
+.black-background {background-color:#000000;}
+.white {color:#ffffff;}
+.tooltip-inner {
+  min-width: 100px;
+  max-width: 100% !important;
+}

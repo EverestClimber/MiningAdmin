@@ -1,0 +1,182 @@
+<div class="content-header">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="header-section">
+				<h1>Global Miner Settings for &nbsp;<strong>{{ vm.user.displayName }}</strong></h1>
+			</div>
+		</div>
+		<div class="col-sm-6 hidden-xs">
+			<div class="header-section">
+				<ul class="breadcrumb breadcrumb-top">
+					<li>Global Miner Settings</li>
+					<li><a href="">{{ vm.user.displayName }}</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="block-title">
+		<h2>Change Global Miner Settings</h2>
+	</div>
+
+	<div id="faq1" class="panel-group">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="core-clock-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#core-clock" ng-click="vm.setState('core-clock')">
+						<strong>Change Global Core Clock</strong>
+					</a>
+				</div>
+			</div>
+			<div id="core-clock" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="core-clock-form" ng-submit="vm.setCoreClock()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Global Core</label>
+							<span class="form-control" disabled>{{ vm.coreClock() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Global Core</label>
+							<input type="text" pattern="^[0-9]*$" class="form-control" name="newCore" minlength="3" maxlength="4" data-error="That's not a correct number" required ng-model="vm.input.coreClock">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="memory-clock-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#memory-clock" ng-click="vm.setState('memory-clock')">
+						<strong>Change Global Memory Clock</strong>
+					</a>
+				</div>
+			</div>
+			<div id="memory-clock" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="memory-clock-form" ng-submit="vm.setMemoryClock()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Global Memory</label>
+							<span class="form-control" disabled>{{ vm.memoryClock() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Global Memory</label>
+							<input type="text" pattern="^[0-9]*$" class="form-control" name="newMem" minlength="3" maxlength="4" data-error="That's not a correct number" required ng-model="vm.input.memoryClock">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="fan-speed-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#fan-speed" ng-click="vm.setState('fan-speed')">
+						<strong>Change Global Fan Speed</strong>
+					</a>
+				</div>
+			</div>
+			<div id="fan-speed" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="fan-speed-form" ng-submit="vm.setFanSpeed()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Fan Setting</label>
+							<span class="form-control" disabled>{{ vm.fanSpeed() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Fan Setting</label>
+							<input type="text" class="form-control" name="newFan" minlength="2" maxlength="3" data-error="That is not correct?" required ng-model="vm.input.fanSpeed">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+					<a id="power-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#power" ng-click="vm.setState('power')">
+						<strong>Change Global Power Tune</strong>
+					</a>
+				</div>
+			</div>
+			<div id="power" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="power-form" ng-submit="vm.setPower()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Global Power</label>
+							<span class="form-control" disabled>{{ vm.power() }}</span>
+						</div>
+						<div class="form-group has-feedback">
+							<label for="example-nf-password">New Global Power</label>
+							<input name="newPower" id="ex1" data-slider-id="ex1Slider" type="text" data-slider-min="0" data-slider-max="7" data-slider-step="1" data-slider-value="1" required ng-model="vm.input.power">
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+							<button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="panel-title">
+					<i class="fa fa-angle-right"></i>
+						<a id="mass-reboot-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#mass-reboot" ng-click="vm.setState('mass-reboot')">
+							<strong>Trigger a Mass Reboot</strong>
+						</a>
+				</div>
+			</div>
+			<div id="mass-reboot" class="panel-collapse collapse">
+				<div class="panel-body">
+					<form id="mass-reboot-form" ng-submit="vm.setMassReboot()" class="form-bordered">
+						<div class="form-group">
+							<label for="example-nf-password">Current Amount of Mass Reboots</label>
+							<span class="form-control" disabled>{{ vm.massReboot() }}</span>
+						</div>
+
+						<div class="form-group form-actions">
+							<label for="example-nf-password">This will reboot all of your miners..</label>
+							<span class="help-block">You are absolutely sure?</span>
+							<button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$('#ex1').bootstrapSlider({
+	formatter: function(value) {
+		return 'Value: ' + value;
+	}
+});
+</script>
