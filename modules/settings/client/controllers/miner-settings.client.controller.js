@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('core')
+    .module('settings')
     .controller('MinerSettingsController', MinerSettingsController);
 
   MinerSettingsController.$inject = ['$scope', '$state', 'SettingsService', 'Authentication', 'Notification'];

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('core')
+    .module('machines')
     .controller('MachinesController', MachinesController);
 
   MachinesController.$inject = ['$scope', '$stateParams', '$timeout', 'MachinesService', 'Authentication', 'Notification'];
@@ -65,10 +65,17 @@
       var info = machine.info;
       var display = {};
 
+      var monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+
+      var updated = new Date(machine.updated);
+      display.updated = `${monthNames[updated.getMonth()]} ${updated.getDate()} ${updated.getHours()}:${updated.getMinutes()}:${updated.getSeconds()}`;
+
       if (machine.online === true) {
         if (!info.hash) {
-          display.trClass = 'warning';
-        } else if (info.overheat == 1) {
+          display.trclass = 'warning';
+        } else if (info.overheat === 1) {
           display.trClass = 'danger';
         } else if (!info.temp) {
           display.trClass = 'warning';
@@ -92,15 +99,20 @@
       display.pool1 = '';
       display.pool2 = '';
 
+
+      var pool_info = info.pool_info.split('\n');
+      var pattWallet;
+      var pattPool1;
+      var pattPool2;
+      var i;
       if (info.group) {
         display.group = info.group;
 
-        var pool_info = info.pool_info.split('\n');
-        var pattWallet = new RegExp(`(${display.group} proxywallet)(.*)`);
-        var pattPool1 = new RegExp(`(${display.group} proxypool1)(.*)`);
-        var pattPool2 = new RegExp(`(${display.group} proxypool2)(.*)`);
+        pattWallet = new RegExp(`(${display.group} proxywallet)(.*)`);
+        pattPool1 = new RegExp(`(${display.group} proxypool1)(.*)`);
+        pattPool2 = new RegExp(`(${display.group} proxypool2)(.*)`);
 
-        for (var i = 0; i < pool_info.length; i++) {
+        for (i = 0; i < pool_info.length; i++) {
           if (pattWallet.test(pool_info[i])) {
             display.wallet = pool_info[i];
             display.wallet = display.wallet.replace(new RegExp(`${display.group} proxywallet `), '');
@@ -115,12 +127,11 @@
       } else {
         display.group = 'N/A';
 
-        var pool_info = info.pool_info.split('\n');
-        var pattWallet = /(^proxywallet)(.*)/;
-        var pattPool1 = /(^proxypool1)(.*)/;
-        var pattPool2 = /(^proxypool2)(.*)/;
+        pattWallet = /(^proxywallet)(.*)/;
+        pattPool1 = /(^proxypool1)(.*)/;
+        pattPool2 = /(^proxypool2)(.*)/;
 
-        for (var i = 0; i < pool_info.length; i++) {
+        for (i = 0; i < pool_info.length; i++) {
           if (pattWallet.test(pool_info[i])) {
             display.wallet = pool_info[i];
             display.wallet = display.wallet.replace(/proxywallet /, '');
@@ -144,7 +155,7 @@
       var hashes = info.miner_hashes.split(' ');
       var isHashEmpty = false;
 
-      for (var i = 0; i < hashes.length; i++) {
+      for (i = 0; i < hashes.length; i++) {
         if (hashes[i] === '00.00') {
           isHashEmpty = true;
         }
@@ -239,13 +250,22 @@
         });
 
       vm.timer = $timeout(vm.reloadData, vm.reloadInterval);
-    }
+      vm.setTooltip();
+    };
 
-    $scope.$on("$destroy", function() {
+    $scope.$on('$destroy', function() {
       if (vm.timer) {
         $timeout.cancel(vm.timer);
       }
     });
+
+    vm.setTooltip = function() {
+      // Initialize Tooltips
+      $timeout(function() {
+        $('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: 'body', animation: false});
+      }, 100);
+      // console.log($('[data-toggle="tooltip"], .enable-tooltip').tooltip);
+    }
 
     vm.init();
   }

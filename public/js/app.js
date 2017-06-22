@@ -157,7 +157,7 @@ var App = function() {
         var allLinks        = $('.sidebar-nav a', sidebar);
         var menuLinks       = $('.sidebar-nav-menu', sidebar);
         var submenuLinks    = $('.sidebar-nav-submenu', sidebar);
-        
+
         // Add ripple effect to all navigation links
         allLinks.on('click', function(e){
             var link = $(this), ripple, d, x, y;

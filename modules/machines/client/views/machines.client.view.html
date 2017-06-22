@@ -5,7 +5,7 @@
         <a data-toggle="collapse"  href="#collapse1">Farm Details</a>
       </h4>
 		</div> -->
-    <button type="button" data-toggle="collapse" href="#collapse1" class="btn btn-block btn-primary black-background white">Farm Details</button>
+    <button type="button" data-toggle="collapse" href="#collapse1" class="btn btn-block btn-primary whiteup">Farm Details</button>
 		<div id="collapse1" class="panel-collapse collapse">
 		  <div class="panel-body">
 
@@ -138,7 +138,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="machine in vm.machines" ng-if="(vm.machineState === 'online' && machine.online === true) || (vm.machineState === 'offline' && machine.online === false) || vm.machineState === 'all'"
-          ng-class="machine.display.trClass" style='font-size: small;'>
+          ng-class="machine.display.trClass" repeat-loaded="vm.setTooltip()" style='font-size: small;'>
 
             <td align="center" valign="middle">
               <span class="success" data-toggle="tooltip" data-container="body" data-html="true" title="Active miner: {{ machine.display.miner }} <br>Group: {{ machine.display.group }} <br />Wallet: t1cesdj5WMe8K6tYKobNp1qufxWeMNSRJXt<br />Pool1: {{ machine.display.pool1 }}<br>Pool2: {{ machine.display.pool2 }}">
@@ -165,8 +165,8 @@
 
 
             <td align="center" valign="middle">
-              <span class="danger">
-                <a href="#" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Last seen: May 29 21:06:27" class="danger">
+              <span ng-class="machine.info.hash ? 'success' : 'danger' ">
+                <a href="#" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Last seen: {{ machine.display.updated }}">
 
                 </a>
               </span>

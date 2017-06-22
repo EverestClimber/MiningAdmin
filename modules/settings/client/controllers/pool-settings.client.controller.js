@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('core')
+    .module('settings')
     .controller('PoolSettingsController', PoolSettingsController);
 
   PoolSettingsController.$inject = ['$scope', '$state', '$location', 'SettingsService', 'Authentication', 'Notification'];
