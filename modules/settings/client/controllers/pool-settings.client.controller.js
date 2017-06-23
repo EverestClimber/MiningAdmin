@@ -113,7 +113,7 @@
 
     vm.setGlobalMiner = function($valid) {
       if ($valid !== true) return;
-      
+
       vm.settings.info.proxy_pool1 = vm.input.globalPool;
       vm.settings.info.proxy_pool2 = vm.input.backupPool;
       vm.settings.info.proxy_wallet = vm.input.wallet;

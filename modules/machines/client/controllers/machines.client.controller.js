@@ -65,8 +65,8 @@
       var info = machine.info;
       var display = {};
 
-      var monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+      var monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
       ];
 
       var updated = new Date(machine.updated);
@@ -272,11 +272,11 @@
 
     vm.setTooltip = function() {
       // Initialize Tooltips
+      $('.tooltip.top.in').remove();
       $timeout(function() {
-        $('[data-toggle="tooltip"], .enable-tooltip').tooltip({container: 'body', animation: false});
+        $('[data-toggle="tooltip"], .enable-tooltip').tooltip({ container: 'body', animation: false });
       }, 100);
-      // console.log($('[data-toggle="tooltip"], .enable-tooltip').tooltip);
-    }
+    };
 
     vm.init();
   }
