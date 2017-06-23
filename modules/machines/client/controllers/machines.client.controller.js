@@ -14,8 +14,9 @@
 
     vm.user = Authentication.user;
     vm.machineState = $stateParams.state;
+    if (vm.machineState === 'dashboard') vm.machineState = 'online';
     if (vm.machineState !== 'offline' && vm.machineState !== 'online') {
-      vm.machineState === 'all';
+      vm.machineState = 'all';
     }
 
     vm.getInformation = function(machines) {
