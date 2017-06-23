@@ -27,7 +27,7 @@ var MachineSchema = new Schema({
     overheat: Number,
     pool_info: String,
     kernel: String,
-    uptime: String,
+    uptime: Number,
     mac: String,
     hostname: String,
     rack_loc: String,

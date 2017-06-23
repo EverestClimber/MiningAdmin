@@ -205,6 +205,17 @@
         display.hashUnit = '';
       }
 
+      // Uptime
+      var uptime = info.uptime ? info.uptime : 0;
+      var sec = uptime % 60;
+      uptime -= sec;
+      var min = (uptime % 3600) / 60;
+      uptime -= uptime % 3600;
+      var hour = (uptime % 86400) / 3600;
+      uptime -= uptime % 86400;
+      var date = uptime / 86400;
+      display.uptime = `${date}:${hour}:${min}:${sec}`;
+
       // Model
 
       display.model = info.models;
