@@ -50,7 +50,7 @@
       SettingsService.updateSetting(vm.user.username, vm.settings.info)
         .then(function(settings) {
           vm.settings = settings;
-          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success!', delay: 20000 });
+          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success!', delay: 6000 });
         })
         .catch(function(err) {
           Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Error!' });
@@ -73,7 +73,9 @@
       return vm.settings.info.xmr_worksize ? vm.settings.info.xmr_worksize : 'Not yet manually set';
     };
 
-    vm.setWorkSize = function() {
+    vm.setWorkSize = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.worksize = vm.input.worksize;
       vm.settings.info.xmr_worksize = vm.input.xmrWorksize;
       vm.changeSettings('You have successfully changed your worksize settings for sgminer.<br />To apply changes, please trigger a mass reboot.');
@@ -87,7 +89,9 @@
       return vm.settings.info.xmr_intensity ? vm.settings.info.xmr_intensity : 'Not yet manually set';
     };
 
-    vm.setIntensity = function() {
+    vm.setIntensity = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.intensity = vm.input.intensity;
       vm.settings.info.xmr_intensity = vm.input.xmrIntensity;
       vm.changeSettings('You have successfully changed your intensity settings for sgminer.<br />To apply changes, please trigger a mass reboot.');
@@ -101,7 +105,9 @@
       return vm.settings.info.xmr_gpu_threads ? vm.settings.info.xmr_gpu_threads : 'Not yet manually set';
     };
 
-    vm.setThreads = function() {
+    vm.setThreads = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.gpu_threads = vm.input.threads;
       vm.settings.info.xmr_gpu_threads = vm.input.xmrThreads;
       vm.changeSettings('You have successfully changed your threads settings for sgminer.<br />To apply changes, please trigger a mass reboot.');

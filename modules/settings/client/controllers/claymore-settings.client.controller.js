@@ -56,7 +56,7 @@
       SettingsService.updateSetting(vm.user.username, vm.settings.info)
         .then(function(settings) {
           vm.settings = settings;
-          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success!', delay: 20000 });
+          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success!', delay: 6000 });
         })
         .catch(function(err) {
           Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Error!' });
@@ -67,7 +67,9 @@
       return vm.settings.info.clay_zec_mode ? vm.settings.info.clay_zec_mode : 0;
     };
 
-    vm.setClayZecMode = function() {
+    vm.setClayZecMode = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.clay_zec_mode = `mode ${vm.input.clayZecMode}`;
       vm.changeSettings('You have successfully changed claymore zec mode settings.</br>To apply changes, please trigger a mass reboot.');
     };
@@ -76,11 +78,13 @@
       return vm.settings.info.clay_intensity ? vm.settings.info.clay_intensity : 'Not yet manually set';
     };
 
-    vm.zecIntensity = function() {
+    vm.zecIntensity = function($valid) {
       return vm.settings.info.clay_zec_intensity ? vm.settings.info.clay_zec_intensity : 'Not yet manually set';
     };
 
-    vm.setIntensity = function() {
+    vm.setIntensity = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.clay_intensity = vm.input.intensity;
       vm.settings.info.clay_zec_intensity = vm.input.zecIntensity;
       vm.changeSettings('You have successfully changed your intensity settings.</br>To apply changes, please trigger a mass reboot.');

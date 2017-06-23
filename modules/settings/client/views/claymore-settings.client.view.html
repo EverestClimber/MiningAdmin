@@ -38,7 +38,7 @@
 			</div>
 			<div id="zec-mode" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="zec-mode-form" ng-submit="vm.setClayZecMode()" class="form-bordered">
+					<form id="zec-mode-form" name="zecModeForm" ng-submit="vm.setClayZecMode(zecModeForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Claymore Mode</label>
 							<span class="form-control" disabled>{{ vm.clayZecMode() }}</span>
@@ -68,7 +68,7 @@
 			</div>
 			<div id="intensity" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="intensity-form" ng-submit="vm.setIntensity()" method="post" class="form-bordered">
+					<form id="intensity-form" name="intensityForm" ng-submit="vm.setIntensity(intensityForm.$valid)" method="post" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Claymore Intensity</label>
 							<span class="form-control" disabled>{{ vm.intensity() }}</span>

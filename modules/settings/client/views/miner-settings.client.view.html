@@ -33,7 +33,7 @@
 			</div>
 			<div id="core-clock" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="core-clock-form" ng-submit="vm.setCoreClock()" class="form-bordered">
+					<form id="core-clock-form" name="coreClockForm" ng-submit="vm.setCoreClock(coreClockForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Global Core</label>
 							<span class="form-control" disabled>{{ vm.coreClock() }}</span>
@@ -64,7 +64,7 @@
 			</div>
 			<div id="memory-clock" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="memory-clock-form" ng-submit="vm.setMemoryClock()" class="form-bordered">
+					<form id="memory-clock-form" name="memoryClockForm" ng-submit="vm.setMemoryClock(memoryClockForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Global Memory</label>
 							<span class="form-control" disabled>{{ vm.memoryClock() }}</span>
@@ -95,7 +95,7 @@
 			</div>
 			<div id="fan-speed" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="fan-speed-form" ng-submit="vm.setFanSpeed()" class="form-bordered">
+					<form id="fan-speed-form" name="fanSpeedForm" ng-submit="vm.setFanSpeed(fanSpeedForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Fan Setting</label>
 							<span class="form-control" disabled>{{ vm.fanSpeed() }}</span>
@@ -125,7 +125,7 @@
 			</div>
 			<div id="power" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="power-form" ng-submit="vm.setPower()" class="form-bordered">
+					<form id="power-form" name="powerForm" ng-submit="vm.setPower(powerForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Global Power</label>
 							<span class="form-control" disabled>{{ vm.power() }}</span>
@@ -155,7 +155,7 @@
 			</div>
 			<div id="mass-reboot" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="mass-reboot-form" ng-submit="vm.setMassReboot()" class="form-bordered">
+					<form id="mass-reboot-form" name="massRebootForm" ng-submit="vm.setMassReboot(massRebootForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Amount of Mass Reboots</label>
 							<span class="form-control" disabled>{{ vm.massReboot() }}</span>

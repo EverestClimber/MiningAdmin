@@ -61,7 +61,7 @@
       SettingsService.updateSetting(vm.user.username, vm.settings.info)
         .then(function(settings) {
           vm.settings = settings;
-          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success!', delay: 20000 });
+          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success!', delay: 6000 });
         })
         .catch(function(err) {
           Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Error!' });
@@ -72,7 +72,9 @@
       return vm.settings.info.global_core ? vm.settings.info.global_core : 'Not Set';
     };
 
-    vm.setCoreClock = function() {
+    vm.setCoreClock = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.global_core = vm.input.coreClock;
       vm.changeSettings('You have successfully changed global core clock.<br />To apply changes, please trigger a mass reboot.');
     };
@@ -81,7 +83,9 @@
       return vm.settings.info.global_mem ? vm.settings.info.global_mem : 'Not Set';
     };
 
-    vm.setMemoryClock = function() {
+    vm.setMemoryClock = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.global_mem = vm.input.memoryClock;
       vm.changeSettings('You have successfully changed global memory clock.</br>To apply changes, please trigger a mass reboot.');
     };
@@ -90,7 +94,9 @@
       return vm.settings.info.global_fan;
     };
 
-    vm.setFanSpeed = function() {
+    vm.setFanSpeed = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.global_fan = vm.input.fanSpeed;
       vm.changeSettings('You have successfully changed your global fan settings.</br>To apply changes, please trigger a mass reboot.');
     };
@@ -99,7 +105,9 @@
       return vm.settings.info.global_power_tune ? vm.settings.info.global_power_tune : 'Not Set';
     };
 
-    vm.setPower = function() {
+    vm.setPower = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.global_power_tune = vm.input.power;
       vm.changeSettings('You have successfully changed your global power tune settings.</br>To apply changes, please trigger a mass reboot.');
     };
@@ -108,7 +116,9 @@
       return vm.settings.info.mass_reboot ? vm.settings.info.mass_reboot : 0;
     };
 
-    vm.setMassReboot = function() {
+    vm.setMassReboot = function($valid) {
+      if ($valid !== true) return;
+
       if (vm.settings.info.mass_reboot) {
         vm.settings.info.mass_reboot++;
       } else {

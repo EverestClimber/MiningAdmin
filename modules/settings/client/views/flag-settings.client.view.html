@@ -37,7 +37,7 @@
 			</div>
 			<div id="worksize" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="worksize-form" ng-submit="vm.setWorkSize()" class="form-bordered">
+					<form id="worksize-form" name="wordsizeForm" ng-submit="vm.setWorkSize(worksizeForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Sgminer worksize</label>
 							<span class="form-control" disabled>{{ vm.sgminerWorksize() }}</span>
@@ -70,14 +70,14 @@
 			<div class="panel-heading">
 				<div class="panel-title">
 					<i class="fa fa-angle-right"></i>
-					<a id="intensity-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#intensity" ng-click="vm.setState('intensity')">
+					<a id="intensity-link" name class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#intensity" ng-click="vm.setState('intensity')">
 						<strong>Change Intensity</strong>
 					</a>
 				</div>
 			</div>
 			<div id="intensity" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="intensity-form" ng-submit="vm.setIntensity()" class="form-bordered">
+					<form id="intensity-form" name="intensityForm" ng-submit="vm.setIntensity(intensityForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Sgminer XIntensity</label>
 							<span class="form-control" disabled>{{ vm.sgminerIntensity() }}</span>
@@ -117,7 +117,7 @@
 			</div>
 			<div id="threads" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="threads-form" ng-submit="vm.setThreads()" class="form-bordered">
+					<form id="threads-form" name="threadsForm" ng-submit="vm.setThreads(threadsForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Sgminer GPU Threads</label>
 							<span class="form-control" disabled>{{ vm.sgminerThreads() }}</span>

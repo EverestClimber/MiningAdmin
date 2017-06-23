@@ -52,7 +52,7 @@
       SettingsService.updateSetting(vm.user.username, vm.settings.info)
         .then(function(settings) {
           vm.settings = settings;
-          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success!', delay: 20000 });
+          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success!', delay: 6000 });
         })
         .catch(function(err) {
           Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Error!' });
@@ -69,7 +69,9 @@
       return vm.settings.info.proxy_wallet;
     };
 
-    vm.setWallet = function() {
+    vm.setWallet = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.proxy_wallet = vm.input.wallet;
       vm.changeSettings('You have successfully changed global wallet.<br />To apply changes, please trigger a mass reboot.');
     };
@@ -82,7 +84,9 @@
       return vm.settings.info.proxy_pool2;
     };
 
-    vm.setPool = function() {
+    vm.setPool = function($valid) {
+      if ($valid !== true) return;
+
       vm.settings.info.proxy_pool1 = vm.input.globalPool;
       vm.settings.info.proxy_pool2 = vm.input.backupPool;
       vm.changeSettings('You have successfully changed global pool.<br />To apply changes, please trigger a mass reboot.');
@@ -107,7 +111,9 @@
       return vm.settings.info.pool_pass2;
     };
 
-    vm.setGlobalMiner = function() {
+    vm.setGlobalMiner = function($valid) {
+      if ($valid !== true) return;
+      
       vm.settings.info.proxy_pool1 = vm.input.globalPool;
       vm.settings.info.proxy_pool2 = vm.input.backupPool;
       vm.settings.info.proxy_wallet = vm.input.wallet;

@@ -38,7 +38,7 @@
 			</div>
 			<div id="wallet" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="wallet-form" ng-submit="vm.setWallet()" class="form-bordered">
+					<form id="wallet-form" name="walletForm" ng-submit="vm.setWallet(walletForm.$valid)" class="form-bordered">
 						<div class="form-group">
 							<label for="example-nf-password">Current Global Wallet</label>
 							<span class="form-control" disabled>{{ vm.wallet() }}</span>
@@ -68,7 +68,7 @@
 			</div>
 			<div id="pool" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="pool-form" ng-submit="vm.setPool()" class="form-bordered" data-toggle="validator">
+					<form id="pool-form" name="poolForm" ng-submit="vm.setPool(poolForm.$valid)" class="form-bordered" data-toggle="validator">
 						<div class="form-group">
 							<label for="example-nf-password">Current Global Pool</label>
 							<span class="form-control" disabled>{{ vm.globalPool() }}</span>
@@ -108,7 +108,7 @@
 			</div>
 			<div id="miner" class="panel-collapse collapse">
 				<div class="panel-body">
-					<form id="miner-form" class="form-bordered" ng-submit="vm.setGlobalMiner()">
+					<form id="miner-form" name="minerForm" class="form-bordered" ng-submit="vm.setGlobalMiner(minerForm.$valid)">
 						<div class="form-group">
 							<label>Current active miner</label>
 							<span class="form-control" disabled>{{ vm.globalMiner() }}</span>
