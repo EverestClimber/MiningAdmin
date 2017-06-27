@@ -12,15 +12,17 @@ var mongoose = require('mongoose'),
 var MachineSchema = new Schema({
   user: {
     type: String,
-    default: ''
+    default: '',
+    unique: true
   },
   host: {
     type: String,
-    default: ''
+    default: '',
+    unique: true
   },
   updated: {
     type: Number,
-    default: Date.now()
+    default: Date.now
   },
   info: {
     allowed: Number,

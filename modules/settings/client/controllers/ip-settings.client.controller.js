@@ -3,11 +3,11 @@
 
   angular
     .module('settings')
-    .controller('PoolSettingsController', PoolSettingsController);
+    .controller('IPSettingsController', IPSettingsController);
 
-  PoolSettingsController.$inject = ['$scope', '$state', 'SettingsService', 'Authentication', 'Notification'];
+  IPSettingsController.$inject = ['$scope', '$state', 'SettingsService', 'Authentication', 'Notification'];
 
-  function PoolSettingsController($scope, $state, SettingsService, Authentication, Notification) {
+  function IPSettingsController($scope, $state, SettingsService, Authentication, Notification) {
     var vm = this;
 
     vm.user = Authentication.user;

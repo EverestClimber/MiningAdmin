@@ -5,9 +5,9 @@
     .module('settings')
     .controller('FlagSettingsController', FlagSettingsController);
 
-  FlagSettingsController.$inject = ['$scope', '$state', '$location', 'SettingsService', 'Authentication', 'Notification'];
+  FlagSettingsController.$inject = ['$scope', '$state', 'SettingsService', 'Authentication', 'Notification'];
 
-  function FlagSettingsController($scope, $state, $location, SettingsService, Authentication, Notification) {
+  function FlagSettingsController($scope, $state, SettingsService, Authentication, Notification) {
     var vm = this;
 
     vm.user = Authentication.user;

@@ -1,0 +1,225 @@
+<div class="content-header">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="header-section">
+        <h1>Single Rig Settings for {{ vm.getName() }}</h1>
+      </div>
+    </div>
+    <div class="col-sm-6 hidden-xs">
+      <div class="header-section">
+        <ul class="breadcrumb breadcrumb-top">
+          <li>Rig Settings</li>
+          <li><a href="">{{ vm.getName() }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="block">
+  <div class="block-title">
+    <h2>Single Rig Settings</h2>
+  </div>
+  <div class="row text-center">
+    <div class="block-section">
+    </div>
+  </div>
+  <div id="faq1" class="panel-group">
+    <!--<div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa fa-angle-right"></i>
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#reboot">
+            <strong>Reboot {{ vm.getName() }}</strong>
+          </a>
+        </div>
+      </div>
+      <div id="reboot" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form id="reboot-form" name="rebootForm" ng-submit="vm.setReboot(rebootForm.$valid)" class="form-bordered">
+            <div class="form-group">
+              <label for="example-nf-password">Current amount of single reboots</label>
+              <span class="form-control" disabled>{{ vm.reboots() }}</span>
+            </div>
+            <div class="form-group has-feedback">
+              <div class="checkbox">
+                <label>
+                <input type="checkbox" id="terms" data-error="You have to be sure!" required>
+                Are you sure?
+                </label>
+                <div class="help-block with-errors"></div>
+              </div>
+              <input type="hidden" id="hostname" name="hostname" class="form-control" value="{{ vm.params.rig }}">
+              <input type="hidden" id="mac" name="mac" class="form-control" value="{{ vm.params.mac }}">
+            </div>
+            <div class="form-group form-actions">
+              <button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+              <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>-->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#settings"><strong>Individual settings for {{ vm.getName() }} </strong></a>
+        </div>
+      </div>
+      <div id="settings" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form id="settings-form" name="settingsForm" ng-submit="vm.setSettings(settingsForm.$valid)" class="form-horizontal form-bordered" data-toggle="validator">
+            <div class="form-group">
+              <div class="col-sm-4">
+                <label for="example-nf-password">Current Core clock for this rig | GPU Count: {{ vm.params.gpus }}</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <span class="form-control" disabled>{{ vm.coreRig() }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <label for="example-nf-password">New Core Clock for this rig</label>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <div ng-repeat="i in vm.getNumber(vm.params.gpus) track by $index" class="col-sm-2">
+                GPU {{ $index }} : <input type="text" pattern="^[0-9]*$" class="form-control" name="newCore[]" minlength="3" maxlength="4" placeholder="1000" data-error="Thats not a correct number" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+              </div>
+              <!-- <input type="text" pattern="^[0-9 ]*$" class="form-control" name="newCore" minlength="3" maxlength="41" placeholder="1000 1050 1075 1000 1100" data-error="That's not a correct number" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>-->
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <label for="example-nf-password">Current Memory Clock for this rig</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <span class="form-control" disabled>{{ vm.memRig() }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <label for="example-nf-password">New Memory Clock for this rig</label>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <div ng-repeat="i in vm.getNumber(vm.params.gpus) track by $index" class="col-sm-2">
+                GPU {{ $index }} : <input type="text" pattern="^[0-9]*$" class="form-control" name="newMem[]" minlength="3" maxlength="4" placeholder="1500" data-error="Thats not a correct number" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+              </div>
+              <!--<input type="text" pattern="^[0-9 ]*$" class="form-control" name="newMem" minlength="3" maxlength="41" placeholder="1500 1250 1750 1500 1625" data-error="That's not a correct number" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>-->
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <label for="example-nf-password">Current Fan Setting for this rig</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <span class="form-control" disabled>{{ vm.fanRig() }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <label for="example-nf-password">New Fan Setting for this rig</label>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <div ng-repeat="i in vm.getNumber(vm.params.gpus) track by $index" class="col-sm-2">
+                GPU {{ $index }} : <input type="text" pattern="^[0-9]*$" class="form-control" name="newFan[]" minlength="2" maxlength="3" placeholder="75" data-error="Thats not a correct number" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+              </div>
+              <!--<input type="text" class="form-control" name="newFan" minlength="2" maxlength="31" placeholder="50 70 60 60 50" data-error="That is not correct?" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>-->
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <label for="example-nf-password">Current Power Setting for this rig</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <span class="form-control" disabled>{{ vm.pwrRig() }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4">
+                <label for="example-nf-password">New Power Setting for this rig | MAX 7 FOR RX Series Cards!</label>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <div ng-repeat="i in vm.getNumber(vm.params.gpus) track by $index" class="col-sm-2">
+                GPU {{ $index }} : <input type="text" pattern="^[0-9]*$" class="form-control" name="newPower[]" minlength="1" maxlength="2" placeholder="7" data-error="Thats not a correct number" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+              </div>
+              <!--<input name="newPower" id="ex1" data-slider-id="ex1Slider" type="text" data-slider-min="0" data-slider-max="7" data-slider-step="1" data-slider-value="1" required>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>-->
+              <input type="hidden" id="hostname" name="miner" class="form-control" value="<?php echo $miner; ?>">
+              <input type="hidden" id="hostname2" name="rig" class="form-control" value="<?php echo $rig; ?>">
+              <input type="hidden" id="mac" name="mac" class="form-control" value="<?php echo $mac; ?>">
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group form-actions">
+              <div class="col-sm-4">
+                <button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+                <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!--<div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#rename"><strong>Rename <?php if (isset($_GET['miner'])){ echo $_GET['miner']; } else { echo $_GET['rig']; } ?></strong></a>
+        </div>
+      </div>
+      <div id="rename" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form id="rename-form" name="renameForm" ng-submit="vm.setName(renameForm.$valid)" class="form-bordered">
+            <div class="form-group">
+              <label for="example-nf-password">Current name</label>
+              <span class="form-control" disabled><?php if (isset($_GET['miner'])){ echo $_GET['miner']; } else { echo $_GET['reb']; } ?></span>
+            </div>
+            <div class="form-group has-feedback">
+              <label for="example-nf-password">New name</label>
+              <input type="text" id="newName" name="newName" class="form-control" minlength="2" data-error="Please enter a new name.." required>
+              <input type="hidden" id="mac" name="mac" class="form-control" value="<?php echo $mac; ?>">
+              <input type="hidden" id="ip" name="ip" class="form-control" value="<?php echo $ip; ?>">
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group form-actions">
+              <button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+              <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#threads"><strong>...</strong></a>
+        </div>
+      </div>
+      <div id="threads" class="panel-collapse collapse">
+        <div class="panel-body">
+        </div>
+      </div>
+    </div>-->
+  </div>
+</div>

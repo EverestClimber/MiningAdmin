@@ -13,6 +13,6 @@ module.exports = function (app) {
 
   app.route('/api/machines/:userName/:hostName')
     .get(machines.read)
-    .post(machines.update);
-
+    .post(machines.update)
+    .delete(machines.delete);
 };

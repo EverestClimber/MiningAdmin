@@ -45,6 +45,24 @@
         data: {
           pageTitle: 'Claymore Settings'
         }
+      })
+      .state('home.rig-settings', {
+        url: 'rig-settings/:state?mac&gpus&miner',
+        templateUrl: '/modules/settings/client/views/rig-settings.client.view.html',
+        controller: 'RigSettingsController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'Rig Settings'
+        }
+      })
+      .state('home.ip-settings', {
+        url: 'ip-settings/:state?mac&gpus&miner',
+        templateUrl: '/modules/settings/client/views/ip-settings.client.view.html',
+        controller: 'IPSettingsController',
+        controllerAs: 'vm',
+        data: {
+          pageTitle: 'IP Settings'
+        }
       });
   }
 }());

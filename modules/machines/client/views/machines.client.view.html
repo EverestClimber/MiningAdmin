@@ -142,7 +142,7 @@
 
             <td align="center" valign="middle">
               <span class="success" data-toggle="tooltip" data-container="body" data-html="true" title="Active miner: {{ machine.display.miner }} <br>Group: {{ machine.display.group }} <br />Wallet: t1cesdj5WMe8K6tYKobNp1qufxWeMNSRJXt<br />Pool1: {{ machine.display.pool1 }}<br>Pool2: {{ machine.display.pool2 }}">
-                <a href="rename.php?mac='.$json["mac"].'&ip='.$json["ip"].'&miner='.$json["hostname"].'&rename=yes" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="modal" data-target="#renameModal" class="danger">
+                <a href="javascript:void(0)" ng-click="vm.openDialog('md', '.modal-parent', 'renameModalContent.html', 'RenameController', { machine: machine })" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="modal" data-target="#renameModal" class="danger">
                   {{ machine.info.hostname }}
                 </a>
               </span>
@@ -156,7 +156,7 @@
 
             <td align="center" valign="middle">
               <span class="success" ng-if="machine.online == true">
-                <a href="ip.php?mac='.$json["mac"].'&naam='.$json["hostname"].'&ip=new" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Click to give me a static ip" class="danger">
+                <a href="javascript:void(0)" ui-sref="home.ip-settings({ state: 'settings', mac: machine.info.mac, name: machine.info.gpus })" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Click to give me a static ip" class="danger">
                   {{ machine.info.ip }}
                 </a>
               </span>
@@ -203,13 +203,129 @@
               {{ machine.info.version }}
             </td>
             <td align="center" valign="middle" class="text-center" width="10%" cellpadding="0" cellspacing="0">
-              <a href="minerlog.php?miner=" data-toggle="modal" data-target="#logModal" class="btn btn-effect-ripple btn-xs btn-danger" ><span data-toggle="tooltip" title="Miner Log" data-placement="top"><i class="fa fa-file-text-o"></i></span></a>
-              <a ng-if="machine.online" href="rig.php?mac=&gpus=&miner=&settings=yes" data-toggle="tooltip" title="Settings" class="btn btn-effect-ripple btn-xs btn-info"><i class="fa fa-sliders"></i></a>
-              <a href="reboot.php?mac=&rig=&reb=yes" data-toggle="modal" data-target="#rebootModal" class="btn btn-effect-ripple btn-xs btn-danger" ><span data-toggle="tooltip" title="Reboot Rig"><i class="fa fa-power-off"></i></span></a>
+              <a href="javascript:void(0)" ng-click="vm.openDialog('md', '.modal-parent', 'logModalContent.html', 'LogsController', { miner: machine.info.hostname })" class="btn btn-effect-ripple btn-xs btn-danger" ><span data-toggle="tooltip" title="Miner Log" data-placement="top"><i class="fa fa-file-text-o"></i></span></a>
+              <a ng-if="machine.online" ui-sref="home.rig-settings({ state: 'settings', mac: machine.info.mac, gpus: machine.info.gpus, miner: machine.info.hostname })" data-toggle="tooltip" title="Settings" class="btn btn-effect-ripple btn-xs btn-info"><i class="fa fa-sliders"></i></a>
+              <a ng-if="machine.online" href="javascript:void(0)" ng-click="vm.openDialog('md', '.modal-parent', 'rebootModalContent.html', 'RebootController', { mac: machine.info.mac, rig: machine.info.hostname })" class="btn btn-effect-ripple btn-xs btn-danger" ><span data-toggle="tooltip" title="Reboot Rig"><i class="fa fa-power-off"></i></span></a>
+              <a ng-if="!machine.online" ng-click="vm.deleteMachine(machine.user, machine.host)" data-toggle="tooltip" title="Remove Dead Entry" class="btn btn-effect-ripple btn-xs btn-danger" ><i class="fa fa-trash-o"></i></a>
             </td>
           </tr>
-        </tbody>
+      </tbody>
 
   </div>
   <!-- END Table Styles Content -->
 </div>
+
+<div class="modal-group">
+  <div class="modal-parent">
+  </div>
+</div>
+
+<!-- Dialog Templates -->
+<script type="text/ng-template" id="renameModalContent.html">
+  <div class="modal-header">
+      <button type="button" class="close" ng-click="$ctrl.cancel()" aria-hidden="true">&times;</button>
+       <h4 class="modal-title" id="modal-title">{{ $ctrl.machine.host }}</h4>
+  </div>
+  <div class="modal-body" id ="modal-body">
+    <form id="rename-form" name="renameForm" ng-submit="$ctrl.rename(renameForm.$valid)" class="form-bordered">
+      <div class="form-group">
+        <label for="example-nf-password">Current name</label>
+          <span class="form-control" disabled>{{ $ctrl.machine.host }}</span>
+      </div>
+
+      <div class="form-group has-feedback">
+        <label for="example-nf-password">New name</label>
+        <input ng-model="$ctrl.input.name" type="text" id="newName" name="newName" class="form-control" minlength="2" data-error="Please enter a new name.." required>
+
+        <input type="hidden" id="mac" name="mac" class="form-control" value="{{ $ctrl.machine.info.mac }}">
+        <input type="hidden" id="ip" name="ip" class="form-control" value="{{ $ctrl.machine.info.ip }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        <div class="help-block with-errors"></div>
+      </div>
+      <div class="form-group form-actions">
+        <button type="submit" class="btn btn-effect-ripple btn-primary" ng-class="{'disabled': renameForm.$invalid}" ng-disabled=" $ctrl.user.username === 'Test' ">Submit</button>
+        <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+        <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.cancel()">Close</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</script>
+
+<script type="text/ng-template" id="rebootModalContent.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.cancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{ $ctrl.rig }}</h4>
+  </div>
+  <div class="modal-body">
+    <form id="reboot-form" name="rebootForm" ng-submit="$ctrl.reboot(rebootForm.$valid)" class="form-bordered">
+      <div class="form-group">
+        <label for="example-nf-password">Current amount of single reboots</label>
+        <span class="form-control" disabled>{{ $ctrl.getReboots() }}</span>
+      </div>
+      <div class="form-group has-feedback">
+        <div class="checkbox">
+          <label>
+          <input ng-model="vm.input.reboot" type="checkbox" id="terms" data-error="You have to be sure!" required>
+          Are you sure?
+          </label>
+          <div class="help-block with-errors"></div>
+        </div>
+        <input type="hidden" id="hostname" name="hostname" class="form-control" value="{{ $ctrl.rig }}">
+        <input type="hidden" id="mac" name="mac" class="form-control" value="{{ $ctrl.mac }}">
+      </div>
+      <div class="form-group form-actions">
+        <button type="submit" class="btn btn-effect-ripple btn-primary" ng-class="{'disabled': rebootForm.$invalid}" ng-disabled=" $ctrl.user.username === 'Test' ">Submit</button>
+        <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+        <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.cancel()">Close</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</script>
+
+<script type="text/ng-template" id="logModalContent.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.cancel()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{ $ctrl.miner }}</h4>
+  </div>
+  <div class="modal-body">
+  <div class="block">
+    <div id="faq1" class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q1"><strong>Log (short)</strong></a>
+          </div>
+        </div>
+        <div id="faq1_q1" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <p class="remove-margin"><span>{{ $ctrl.latestLog() }}</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-title">
+            <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q2"><strong>Log (long)</strong></a>
+          </div>
+        </div>
+        <div id="faq1_q2" class="panel-collapse collapse">
+          <div class="panel-body">
+            <p class="remove-margin" ng-repeat="log in $ctrl.logs">
+              {{ log }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="button" class="btn btn-effect-ripple btn-danger" ng-click="$ctrl.clear()" ng-disabled=" $ctrl.user.username === 'Test' ">Clear Logs</button> -->
+    <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()">Close</button>
+  </div>
+</script>

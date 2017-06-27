@@ -43,7 +43,17 @@ var SettingSchema = new Schema({
     clay_intensity: Number,
     clay_zec_intensity: Number,
     clay_zec_mode: String,
-    xmr_worksize: String
+    xmr_worksize: String,
+    fixed_ip: [String],
+    net_mask: [String],
+    gateway: [String],
+    reb: [String],
+    dhcp: [String],
+    cor: [String],
+    mem: [String],
+    fan: [String],
+    pwr: [String],
+    name: [String]
   }
 });
 

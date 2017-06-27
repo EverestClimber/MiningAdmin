@@ -5,9 +5,9 @@
     .module('machines')
     .controller('MachinesController', MachinesController);
 
-  MachinesController.$inject = ['$scope', '$stateParams', '$timeout', 'MachinesService', 'Authentication', 'Notification'];
+  MachinesController.$inject = ['$scope', '$stateParams', '$timeout', 'MachinesService', 'LogsService', 'Authentication', 'Notification', '$uibModal', '$document'];
 
-  function MachinesController($scope, $stateParams, $timeout, MachinesService, Authentication, Notification) {
+  function MachinesController($scope, $stateParams, $timeout, MachinesService, LogsService, Authentication, Notification, $uibModal, $document) {
     var vm = this;
 
     vm.timeLimit = 300 * 1000; // 300 seconds
@@ -42,6 +42,7 @@
           vm.dashboard.gpu.onlineCount += machines[i].gpu;
           vm.dashboard.hash.onlineCount += machines[i].hash;
           machines[i].online = true;
+          vm.saveLog(machines[i]);
 
         } else {
           // offline
@@ -236,7 +237,7 @@
       vm.reloadData();
     };
 
-    vm.reloadData = function() {
+    vm.loadData = function() {
       vm.dashboard = {
         rig: {},
         gpu: {},
@@ -260,6 +261,10 @@
           // console.log(err);
           Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> No Machine!' });
         });
+    };
+
+    vm.reloadData = function() {
+      vm.loadData();
 
       vm.timer = $timeout(vm.reloadData, vm.reloadInterval);
       vm.setTooltip();
@@ -271,6 +276,23 @@
       }
     });
 
+    vm.deleteMachine = function(user, host) {
+
+      MachinesService.deleteMachine(user, host)
+        .then(function(machines) {
+          Notification.success({ message: 'Dead entry successfully deleted.', title: '<i class="glyphicon glyphicon-remove"></i> Delete Machine!', delay: 6000 });
+          vm.loadData();
+        })
+        .catch(function(err) {
+          // console.log(err);
+          Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> No Machine!', delay: 6000 });
+        });
+    };
+
+    vm.saveLog = function(machine) {
+      LogsService.newLogs(vm.user.username, machine.info.hostname, machine.info.miner_log);
+    };
+
     vm.setTooltip = function() {
       // Initialize Tooltips
       $('.tooltip.top.in').remove();
@@ -279,6 +301,38 @@
       }, 100);
     };
 
-    vm.init();
+    vm.openDialog = function (size, parentSelector, templateUrl, controller, params) {
+      var parentElem = parentSelector ?
+      angular.element($document[0].querySelector('.modal-group ' + parentSelector)) : undefined;
+      var modalInstance = $uibModal.open({
+        animation: true,
+        ariaLabelledBy: 'modal-title',
+        ariaDescribedBy: 'modal-body',
+        templateUrl: templateUrl,
+        controller: controller,
+        controllerAs: '$ctrl',
+        size: size,
+        appendTo: parentElem,
+        resolve: {
+          params: function() {
+            return params;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (message) {
+        Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> ${message}`, title: '<i class="glyphicon glyphicon-ok"></i> Success', delay: 6000 });
+        vm.loadData();
+      }, function () {
+
+      });
+    };
+
+    $scope.$on('$viewContentLoaded', function (event) {
+      // code that will be executed ...
+      // every time this view is loaded
+      vm.init();
+
+    });
   }
 }());

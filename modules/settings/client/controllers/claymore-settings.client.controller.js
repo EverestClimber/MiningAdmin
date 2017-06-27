@@ -5,9 +5,9 @@
     .module('settings')
     .controller('ClaymoreSettingsController', ClaymoreSettingsController);
 
-  ClaymoreSettingsController.$inject = ['$scope', '$state', '$location', 'SettingsService', 'Authentication', 'Notification'];
+  ClaymoreSettingsController.$inject = ['$scope', '$state', 'SettingsService', 'Authentication', 'Notification'];
 
-  function ClaymoreSettingsController($scope, $state, $location, SettingsService, Authentication, Notification) {
+  function ClaymoreSettingsController($scope, $state, SettingsService, Authentication, Notification) {
     var vm = this;
 
     vm.user = Authentication.user;

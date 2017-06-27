@@ -51,25 +51,31 @@ exports.read = function (req, res) {
 };
 
 /**
- * Update an article
+ * Update an machine
  */
 exports.update = function (req, res) {
   var userName = req.params.userName;
   var hostName = req.params.hostName;
+  var newHostName = req.body.host;
   var info = req.body.info;
+  var setting = req.body.setting;
+
+  if (!newHostName) newHostName = hostName;
+  info.hostname = newHostName;
 
   Machine.findOne({ user: userName, host: hostName })
     .then(machine => {
       if (!machine) {
         var newMachine = new Machine({
           user: userName,
-          host: hostName,
+          host: newHostName,
           updated: Date.now(),
           info: info
         });
         return newMachine.save();
       } else {
-        machine.updated = Date.now();
+        machine.host = newHostName;
+        if (!setting) machine.updated = Date.now();
         machine.info = req.body.info;
         return machine.save();
       }
@@ -86,20 +92,24 @@ exports.update = function (req, res) {
 };
 
 /**
- * Delete an article
+ * Delete an Machine
  */
 exports.delete = function (req, res) {
-  /* var article = req.article;
+  var userName = req.params.userName;
+  var hostName = req.params.hostName;
 
-  article.remove(function (err) {
-    if (err) {
+  Machine.findOne({ user: userName, host: hostName })
+    .then(machine => {
+      return machine.remove();
+    })
+    .then(() => {
+      res.json({ message: 'The machine is deleted successfully.' });
+    })
+    .catch(err => {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)
-      });FF
-    } else {
-      res.json(article);
-    }
-  });*/
+      });
+    });
 };
 
 /**
