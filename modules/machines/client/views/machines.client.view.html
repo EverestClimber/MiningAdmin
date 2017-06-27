@@ -156,7 +156,7 @@
 
             <td align="center" valign="middle">
               <span class="success" ng-if="machine.online == true">
-                <a href="javascript:void(0)" ui-sref="home.ip-settings({ state: 'settings', mac: machine.info.mac, name: machine.info.gpus })" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Click to give me a static ip" class="danger">
+                <a href="javascript:void(0)" ui-sref="home.ip-settings({ state: 'settings', mac: machine.info.mac, name: machine.info.hostname })" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="tooltip" title="Click to give me a static ip" class="danger">
                   {{ machine.info.ip }}
                 </a>
               </span>

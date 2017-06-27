@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="header-section">
-        <h1>Change ip settings for <?php if (isset($_GET['naam'])){ echo $_GET['naam']; } else { echo $_GET['rig']; } ?></h1>
+        <h1>Change ip settings for {{ vm.name }}</h1>
       </div>
     </div>
     <div class="col-sm-6 hidden-xs">
       <div class="header-section">
         <ul class="breadcrumb breadcrumb-top">
           <li>IP Settings</li>
-          <li><a href=""><?php if (isset($_GET['naam'])){ echo $_GET['naam']; } else { echo $_GET['rig']; } ?></a></li>
+          <li><a href="">{{ vm.name }}</li>
         </ul>
       </div>
     </div>
@@ -23,59 +23,55 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">
-          <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#reboot"><strong>Set Fixed IP for <?php echo $_GET['naam']; ?></strong></a>
+          <i class="fa fa-angle-right"></i> <a id="settings-link" class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#reboot"><strong>Set Fixed IP for {{ vm.name }}</strong></a>
         </div>
       </div>
-      <div id="reboot" class="panel-collapse collapse in">
+      <div id="reboot" class="panel-collapse collapse">
         <div class="panel-body">
-          <form id="setStatic" method="post" class="form-bordered" data-toggle="validator" action="ip.php?ip=change">
+          <form id="ip-form" name="ipForm" ng-submit="vm.setIP(ipForm.$valid)" class="form-bordered">
             <div class="form-group">
               <label for="example-nf-password">Current Fixed IP</label>
-              <span class="form-control" disabled><?php getFixed(); ?></span>
+              <span class="form-control" disabled>{{ vm.fixed() }}</span>
             </div>
             <div class="form-group has-feedback">
               <label for="example-nf-password">New IP</label>
-              <input type="text" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" class="form-control" name="newIP" minlength="7" data-error="That's not a valid IP" required>
+              <input ng-model="vm.input.ip" type="text" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" class="form-control" name="newIP" minlength="7" data-error="That's not a valid IP" required>
               <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
               <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
               <label for="example-nf-password">Current Netmask</label>
-              <span class="form-control" disabled><?php getNetmask(); ?></span>
+              <span class="form-control" disabled>{{ vm.netMask() }}</span>
             </div>
             <div class="form-group has-feedback">
               <label for="example-nf-password">Set Netmask</label>
-              <input type="text" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" class="form-control" name="newNetmask" placeholder="255.255.255.0" minlength="7" data-error="That's not a valid Netmask" required>
+              <input ng-model="vm.input.netMask" type="text" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" class="form-control" name="newNetmask" placeholder="255.255.255.0" minlength="7" data-error="That's not a valid Netmask" required>
               <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
               <div class="help-block with-errors"></div>
             </div>
             <div class="form-group has-feedback">
               <label for="example-nf-password">Current Gateway</label>
-              <span class="form-control" disabled><?php getGateway(); ?></span>
+              <span class="form-control" disabled>{{ vm.gateway() }}</span>
             </div>
             <div class="form-group">
               <label for="example-nf-password">New Gateway</label>
-              <input type="text" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" class="form-control" name="newGateway" minlength="7" data-error="That's not a valid Gateway address" required>
+              <input ng-model="vm.input.gateway" type="text" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" class="form-control" name="newGateway" minlength="7" data-error="That's not a valid Gateway address" required>
               <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
               <div class="help-block with-errors"></div>
             </div>
             <div class="form-group has-feedback">
               <div class="checkbox">
                 <label>
-                <input type="checkbox" name="dhcp" data-error="You have to be sure!" value="enabled" <?php getDHCP();?>>
+                <input ng-model="vm.input.dhcp" type="checkbox" name="dhcp" data-error="You have to be sure!" value="enabled" ng-checked="vm.dhcp()">
                 This will set your network settings to DHCP (CHECK CHECKBOX TO <strong>ENABLE</strong> DHCP!). <br>
                 </label>
                 <div class="help-block with-errors"></div>
               </div>
-              <input type="hidden" id="hostname" name="hostname" class="form-control" value="<?php if (isset($_GET['naam'])){ echo $_GET['naam']; } else { echo $_GET['reb']; } ?>">
-              <input type="hidden" id="mac" name="mac" class="form-control" value="<?php echo $_GET['mac']; ?>">
+              <input type="hidden" id="hostname" name="hostname" class="form-control" value="{{ vm.name }}">
+              <input type="hidden" id="mac" name="mac" class="form-control" value="{{ vm.mac }}">
             </div>
             <div class="form-group form-actions">
-              <?php if ($login_session == 'demo') { ?>
-              <button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" disabled>Submit</button>
-              <?php } else { ?>
-              <button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2">Submit</button>
-              <?php } ?>
+              <button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
               <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
             </div>
           </form>
@@ -88,7 +84,7 @@
           <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#threads"><strong>...</strong></a>
         </div>
       </div>
-      <div id="threads" class="panel-collapse collapse <?php if ($pageget == "threads"){ echo "in"; } ?>">
+      <div id="threads" class="panel-collapse collapse">
         <div class="panel-body">
         </div>
       </div>

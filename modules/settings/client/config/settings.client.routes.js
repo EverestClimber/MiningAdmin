@@ -56,7 +56,7 @@
         }
       })
       .state('home.ip-settings', {
-        url: 'ip-settings/:state?mac&gpus&miner',
+        url: 'ip-settings/:state?mac&name',
         templateUrl: '/modules/settings/client/views/ip-settings.client.view.html',
         controller: 'IPSettingsController',
         controllerAs: 'vm',

@@ -12,19 +12,14 @@
 
     vm.user = Authentication.user;
 
-    /* vm.state = function() {
-      return $state.params.state;
-    };*/
-
     vm.state = $state.params.state;
-    // vm.setState(vm.state);
+    vm.mac = $state.params.mac;
+    vm.name = $state.params.name;
 
     vm.init = function() {
       $(`#${vm.state}-link`).click();
 
-      $('#wallet-form').validator();
-      $('#pool-form').validator();
-      $('#miner-form').validator();
+      $('#ip-form').validator();
     };
 
     $scope.$on('$viewContentLoaded', function (event) {
@@ -65,62 +60,190 @@
       });
     };
 
-    vm.wallet = function() {
-      return vm.settings.info.proxy_wallet;
-    };
+    vm.fixed = function() {
+      var mac = vm.mac;
+      var fixedIP = vm.settings.info.fixed_ip;
+      var patt = new RegExp(`${mac}(.*)`);
 
-    vm.setWallet = function($valid) {
-      if ($valid !== true) return;
+      if (!fixedIP) return '';
 
-      vm.settings.info.proxy_wallet = vm.input.wallet;
-      vm.changeSettings('You have successfully changed global wallet.<br />To apply changes, please trigger a mass reboot.');
-    };
-
-    vm.globalPool = function() {
-      return vm.settings.info.proxy_pool1;
-    };
-
-    vm.backupPool = function() {
-      return vm.settings.info.proxy_pool2;
-    };
-
-    vm.setPool = function($valid) {
-      if ($valid !== true) return;
-
-      vm.settings.info.proxy_pool1 = vm.input.globalPool;
-      vm.settings.info.proxy_pool2 = vm.input.backupPool;
-      vm.changeSettings('You have successfully changed global pool.<br />To apply changes, please trigger a mass reboot.');
-    };
-
-    vm.globalMiner = function() {
-      var globalMiner = vm.settings.info.global_miner;
-      var pattern = ['claymore-zec', 'sgminer-gm-xmr', 'sgminer-gm', 'claymore', 'optiminer-zcash', 'claymore-xmr'];
-      var replace = ['Claymore Zcash', 'Sgminer XMR', 'Sgminer Ethereum', 'Claymore Ethereum', 'Optiminer Zcash', 'Claymore XMR'];
-      for (var i = 0; i < pattern.length; i++) {
-        if (globalMiner === pattern[i]) {
-          return replace[i];
+      var i;
+      for (i = 0; i < fixedIP.length; i++) {
+        if (fixedIP[i].match(patt)) {
+          break;
         }
+      }
+
+      if (i === fixedIP.length) {
+        return '';
+      } else {
+        var repPatt = new RegExp(`${mac}`);
+        return fixedIP[i].replace(repPatt, '');
       }
     };
 
-    vm.pass1 = function() {
-      return vm.settings.info.pool_pass1;
+    vm.setFixed = function() {
+
+      var mac = vm.mac;
+      var patt = new RegExp(`${mac}(.*)`);
+
+      if (!vm.settings.info.fixed_ip) {
+        vm.settings.info.fixed_ip = [];
+      }
+      var fixedIP = vm.settings.info.fixed_ip;
+
+      var i;
+      for (i = 0; i < fixedIP.length; i++) {
+        if (fixedIP[i].match(patt)) {
+          break;
+        }
+      }
+
+      fixedIP[i] = `${mac} ${vm.input.ip}`;
     };
 
-    vm.pass2 = function() {
-      return vm.settings.info.pool_pass2;
+    vm.netMask = function() {
+      var mac = vm.mac;
+      var netMask = vm.settings.info.net_mask;
+      var patt = new RegExp(`${mac}(.*)`);
+
+      if (!netMask) return '';
+
+      var i;
+      for (i = 0; i < netMask.length; i++) {
+        if (netMask[i].match(patt)) {
+          break;
+        }
+      }
+
+      if (i === netMask.length) {
+        return '';
+      } else {
+        var repPatt = new RegExp(`${mac}`);
+        return netMask[i].replace(repPatt, '');
+      }
     };
 
-    vm.setGlobalMiner = function($valid) {
-      if ($valid !== true) return;
+    vm.setNetMask = function() {
+      var mac = vm.mac;
+      var patt = new RegExp(`${mac}(.*)`);
 
-      vm.settings.info.proxy_pool1 = vm.input.globalPool;
-      vm.settings.info.proxy_pool2 = vm.input.backupPool;
+      if (!vm.settings.info.net_mask) {
+        vm.settings.info.net_mask = [];
+      }
+      var netMask = vm.settings.info.net_mask;
+
+      var i;
+      for (i = 0; i < netMask.length; i++) {
+        if (netMask[i].match(patt)) {
+          break;
+        }
+      }
+
+      netMask[i] = `${mac} ${vm.input.netMask}`;
+    };
+
+    vm.gateway = function() {
+      var mac = vm.mac;
+      var gateway = vm.settings.info.gateway;
+      var patt = new RegExp(`${mac}(.*)`);
+
+      if (!gateway) return '';
+
+      var i;
+      for (i = 0; i < gateway.length; i++) {
+        if (gateway[i].match(patt)) {
+          break;
+        }
+      }
+
+      if (i === gateway.length) {
+        return '';
+      } else {
+        var repPatt = new RegExp(`${mac}`);
+        return gateway[i].replace(repPatt, '');
+      }
+    };
+
+    vm.setGateway = function() {
+      var mac = vm.mac;
+      var patt = new RegExp(`${mac}(.*)`);
+
+      if (!vm.settings.info.gateway) {
+        vm.settings.info.gateway = [];
+      }
+      var gateway = vm.settings.info.gateway;
+
+      var i;
+      for (i = 0; i < gateway.length; i++) {
+        if (gateway[i].match(patt)) {
+          break;
+        }
+      }
+
+      gateway[i] = `${mac} ${vm.input.gateway}`;
+    };
+
+    vm.dhcp = function() {
+      var mac = vm.mac;
+      var dhcp = vm.settings.info.dhcp;
+      var patt = new RegExp(`${mac}(.*)`);
+
+      if (!dhcp) return '';
+
+      var i;
+      for (i = 0; i < dhcp.length; i++) {
+        if (dhcp[i].match(patt)) {
+          break;
+        }
+      }
+
+      if (i === dhcp.length) {
+        return false;
+      } else {
+        var repPatt = new RegExp(`${mac}`);
+        var result = dhcp[i].replace(repPatt, '');
+        return result.trim() === 'enabled';
+      }
+    };
+
+    vm.setdhcp = function() {
+      var mac = vm.mac;
+      var patt = new RegExp(`${mac}(.*)`);
+
+      if (!vm.settings.info.dhcp) {
+        vm.settings.info.dhcp = [];
+      }
+      var dhcp = vm.settings.info.dhcp;
+
+      var i;
+      for (i = 0; i < dhcp.length; i++) {
+        if (dhcp[i].match(patt)) {
+          break;
+        }
+      }
+
+      dhcp[i] = `${mac} ${vm.input.dhcp === true ? 'enabled' : 'disabled'}`;
+    };
+
+    vm.setIP = function($valid) {
+      /*if ($valid !== true) return;
+
       vm.settings.info.proxy_wallet = vm.input.wallet;
-      vm.settings.info.pool_pass1 = vm.input.poolPass1;
-      vm.settings.info.pool_pass2 = vm.input.poolPass2;
-      vm.settings.info.global_miner = vm.input.globalMiner;
-      vm.changeSettings('You have successfully changed global miner.<br />To apply changes, please trigger a mass reboot.');
+      */
+
+      if (vm.input.dhcp === true) {
+        vm.setFixed();
+        vm.setNetMask();
+        vm.setGateway();
+        vm.setdhcp();
+      } else {
+        vm.setdhcp();
+      }
+
+      vm.changeSettings('You have successfully set a fixed IP.<br />Reboot your system for changes to take effect.');
+
     };
+
   }
 }());
