@@ -15,6 +15,8 @@
     vm.state = $stateParams.state;
     vm.params = $stateParams;
 
+    vm.input = {};
+
     vm.getName = function() {
       if (vm.params.miner) {
         return vm.params.miner;
@@ -30,25 +32,34 @@
     vm.init = function() {
       $(`#${vm.state}-link`).click();
 
-      $('#wallet-form').validator();
-      $('#pool-form').validator();
-      $('#miner-form').validator();
+      $('#settings-form').validator();
 
       if (vm.params.gpus) vm.params.gpus = parseInt(vm.params.gpus, 10);
+      var cor = vm.coreRig().trim().split(' ');
+      var mem = vm.memRig().trim().split(' ');
+      var fan = vm.fanRig().trim().split(' ');
+      var power = vm.pwrRig().trim().split(' ');
+      vm.input.core = [];
+      vm.input.mem = [];
+      vm.input.fan = [];
+      vm.input.power = [];
+      for (let i = 0; i < vm.params.gpus; i++) {
+        vm.input.core[i] = cor[i];
+        vm.input.mem[i] = mem[i];
+        vm.input.fan[i] = fan[i];
+        vm.input.power[i] = power[i];
+      }
     };
 
     $scope.$on('$viewContentLoaded', function (event) {
       // code that will be executed ...
       // every time this view is loaded
       vm.init();
-
     });
 
     vm.settings = {
       info: {}
     };
-
-    vm.input = {};
 
     SettingsService.getSetting(vm.user.username)
       .then(function(settings) {

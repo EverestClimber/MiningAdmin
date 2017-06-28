@@ -227,10 +227,7 @@
     };
 
     vm.setIP = function($valid) {
-      /*if ($valid !== true) return;
-
-      vm.settings.info.proxy_wallet = vm.input.wallet;
-      */
+      if ($valid !== true) return;
 
       if (vm.input.dhcp === true) {
         vm.setFixed();

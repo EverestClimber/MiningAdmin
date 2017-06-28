@@ -1,0 +1,187 @@
+<div class="content-header">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="header-section">
+        <h1>Manage groups for {{ vm.user.username }}</h1>
+      </div>
+    </div>
+    <div class="col-sm-6 hidden-xs">
+      <div class="header-section">
+        <ul class="breadcrumb breadcrumb-top">
+          <li>Groups</li>
+          <li><a href="">{{ vm.user.username }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="block">
+  <div class="block-title">
+    <!-- <h2><?php echo $miner ?></h2> -->
+  </div>
+  <div id="faq1" class="panel-group">
+    <div class="panel panel-default" ng-repeat="group in vm.groups">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q1{{ $index }}"><strong>{{ group.info.groupname }}</strong></a>
+          <a href="javascript:void(0)" ng-click="vm.deleteGroup( $index )" data-toggle="tooltip" title="Remove group" class="btn btn-effect-ripple btn-xs btn-danger pull-right" ><i class="fa fa-trash-o"></i></a>
+        </div>
+      </div>
+      <div id="faq1_q1{{ $index }}" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form id="group-form" name="groupForm" ng-submit="vm.modifyGroup(groupForm.$valid, $index)" class="form-bordered">
+            <div class="form-group has-feedback has-feedback">
+              <label for="example-nf-password">Group Name</label>
+              <input ng-model="group.info.groupname" type="text" class="form-control" name="newGroup" value="{{ group.info.groupname }}" readonly="readonly">
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback has-feedback">
+              <label for="example-nf-password">Specify a range</label>
+              <input ng-model="group.info.grouprange" type="text" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}-(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" placeholder="192.168.1.1-192.168.1.20" value="{{ group.info.grouprange }}" class="form-control" name="newRange" minlength="1" maxlength="32" data-error="Thats not a correct range" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback has-feedback">
+              <label class="control-label">Select a miner for this group</label>
+              <div class="selectContainer">
+                <select ng-model="group.info.groupminer" class="form-control" name="miner" data-error="Please select a miner" required>
+                  <option value="">Choose a miner</option>
+                  <option value="miner" ng-repeat="miner in vm.minerValue track by $index" ng-disabled=" miner === 'claymore-xmr' "  ng-selected=" group.info.groupminer === miner " >{{ vm.minerName[$index] }}</option>
+                </select>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+            <div class="form-group has-feedback has-feedback">
+              <label class="control-label">Enter a pool for this group</label>
+              <input ng-model="group.info.grouppool" type="text" pattern="[-a-zA-Z0-9@:%._\+\/\/~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&=]*)" class="form-control" name="pool" minlength="7" data-error="Is that a valid pooladdres?" value="{{ group.info.grouppool }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback has-feedback">
+              <label class="control-label">Enter a backup pool for this group</label>
+              <input ng-model="group.info.grouppool2" type="text" pattern="[-a-zA-Z0-9@:%._\+\/\/~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&=]*)" class="form-control" name="pool2" minlength="7" data-error="Is that a valid pooladdres?" value="{{ group.info.grouppool2 }}">
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback has-feedback">
+              <label class="control-label">Enter a wallet for this group</label>
+              <input ng-model="group.info.groupwallet" type="text" class="form-control" name="wallet" minlength="10" data-error="You dont need a wallet?" value="{{ group.info.groupwallet }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Enter a pass for this group</label>
+              <input ng-model="group.info.grouppass" type="text" class="form-control" name="pass" value="{{ group.info.grouppass }}" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Enter a pass for this groups backup pool</label>
+              <input ng-model="group.info.grouppass2" type="text" class="form-control" name="pass2" value="{{ group.info.grouppass2 }}" />
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Enter a global core clock for this group</label>
+              <input ng-model="group.info.core" type="text" class="form-control" pattern="^[0-9]*$" minlength="2" maxlength="4" name="core" value="{{ group.info.core }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Enter a a global mem clock for this group</label>
+              <input ng-model="group.info.mem" type="text" class="form-control" pattern="^[0-9]*$" minlength="2" maxlength="4" name="mem" value="{{ group.info.mem }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Enter global power setting for this group (Max 7 for RX based gpus)</label>
+              <input ng-model="group.info.power" type="text" class="form-control" pattern="[0-9]" minlength="1" maxlength="2" name="power" value="{{ group.info.power }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Enter fanspeed for this group</label>
+              <input ng-model="group.info.fan" type="text" class="form-control" pattern="^[0-9]*$" minlength="2" maxlength="3" name="fan" value="{{ group.info.fan }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Enter a maximum temperature for the gpus in this group</label>
+              <input ng-model="group.info.maxtemp" type="text" class="form-control" pattern="^[0-9]*$" minlength="2" maxlength="3" name="maxtemp" value="{{ group.info.maxtemp }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group ETH Sgminer intensity</label>
+              <input ng-model="group.info.sgintensity" type="text" class="form-control" pattern="^[0-9]*$" minlength="1" maxlength="4" name="sgintensity" value="{{ group.info.sgintensity }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group XMR Sgminer intensity</label>
+              <input ng-model="group.info.sgxmrintensity" type="text" class="form-control" pattern="^[0-9]*$" minlength="1" maxlength="4" name="sgxmrintensity" value="{{ group.info.sgxmrintensity }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group ETH Sgminer worksize</label>
+              <input ng-model="group.info.sgworksize" type="text" class="form-control" pattern="^[1-9]*$" minlength="1" maxlength="3" name="sgworksize" value="{{ group.info.sgworksize }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group XMR Sgminer worksize</label>
+              <input ng-model="group.info.sgxmrworksize" type="text" class="form-control" pattern="^[1-9]*$" minlength="1" maxlength="2" name="sgxmrworksize" value="{{ group.info.sgxmrworksize }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group Sgminer ETH Threads</label>
+              <input ng-model="group.info.sgthreads" type="text" class="form-control" pattern="^[1-9]*$" minlength="1" maxlength="2" name="sgthreads" value="{{ group.info.sgthreads }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group Sgminer XMR Threads</label>
+              <input ng-model="group.info.sgxmrthreads" type="text" class="form-control" pattern="^[1-9]*$" minlength="1" maxlength="2" name="sgxmrthreads" value="{{ group.info.sgxmrthreads }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group Claymore ETH intensity</label>
+              <input ng-model="group.info.clayintensity" type="text" class="form-control" pattern="^[1-9]*$" minlength="1" maxlength="2" name="clayintensity" value="{{ group.info.clayintensity }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group Claymore ZEC intensity</label>
+              <input ng-model="group.info.clayzecintensity" type="text" class="form-control" pattern="^[1-9]*$" minlength="1" maxlength="2" name="clayzecintensity" value="{{ group.info.clayzecintensity }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Group Claymore ZEC Mode (1 is low intensive)</label>
+              <input ng-model="group.info.clayzecmode" type="text" class="form-control" pattern="^[0-1]*$" minlength="1" maxlength="1" name="clayzecmode" value="{{ group.info.clayzecmode }}" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback form-actions">
+              <button type="submit" class="btn btn-effect-ripple btn-primary" ng-disabled=" vm.user.username === 'Test' ">Modify</button>
+              <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q2"><strong>...</strong></a>
+        </div>
+      </div>
+      <div id="faq1_q2" class="panel-collapse collapse">
+        <div class="panel-body">
+          <p class="remove-margin"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

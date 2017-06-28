@@ -1,0 +1,192 @@
+<div class="content-header">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="header-section">
+        <h1>Create groups for {{ vm.user.displayName }}</h1>
+      </div>
+    </div>
+    <div class="col-sm-6 hidden-xs">
+      <div class="header-section">
+        <ul class="breadcrumb breadcrumb-top">
+          <li>Groups</li>
+          <li><a href="">{{ vm.user.displayName }}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="block">
+  <div class="block-title">
+    <h2>Add a Group</h2>
+  </div>
+  <div id="faq1" class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q1"><strong>New Group</strong></a>
+        </div>
+      </div>
+      <div id="faq1_q1" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <form id="create-form" name="createForm" ng-submit="vm.createGroup(createForm.$valid)" class="form-bordered">
+            <div class="form-group has-feedback">
+              <label for="example-nf-password">Group Name</label>
+              <input ng-model="vm.input.groupname" type="text" class="form-control" name="newGroup" minlength="1" maxlength="15" data-error="Please enter a groupname" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label for="example-nf-password">Specify a range</label>
+              <input ng-model="vm.input.grouprange" type="text" pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}-(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" placeholder="192.168.1.1-192.168.1.20" class="form-control" name="newRange" minlength="1" maxlength="32" data-error="That's not a correct range" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Select a miner for this group</label>
+              <div class="selectContainer">
+                <select ng-model="vm.input.groupminer" class="form-control" name="miner" data-error="Please select a miner" required>
+                  <option value="">Choose a miner</option>
+                  <option value="claymore">Claymore Ethereum</option>
+                  <option value="claymore-xmr" disabled>Claymore XMR</option>
+                  <option value="claymore-zec">Claymore Zcash</option>
+                  <option value="ethminer">Genoil Ethminer</option>
+                  <option value="optiminer-zcash">Optiminer Zcash</option>
+                  <option value="sgminer-gm">Sgminer Ethereum</option>
+                  <option value="sgminer-gm-xmr">Sgminer XMR</option>
+                </select>
+                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Enter a pool for this group</label>
+              <input ng-model="vm.input.grouppool" type="text" pattern="[-a-zA-Z0-9@:%._\+\/\/~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&=]*)" class="form-control" name="pool" minlength="7" data-error="Is that a valid pooladdres?" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Enter a backup pool for this group</label>
+              <input ng-model="vm.input.grouppool2" type="text" pattern="[-a-zA-Z0-9@:%._\+\/\/~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&=]*)" class="form-control" name="pool2" minlength="7" data-error="Is that a valid pooladdres?" >
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group has-feedback">
+              <label class="control-label">Enter a wallet for this group</label>
+              <input ng-model="vm.input.groupwallet" type="text" class="form-control" name="wallet" minlength="10" data-error="You don't need a wallet?" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Enter a pass for this group's poool</label>
+              <input ng-model="vm.input.grouppass" type="text" class="form-control" name="pass" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Enter a backup pass for this group's pool</label>
+              <input ng-model="vm.input.grouppass2" type="text" class="form-control" name="pass2" />
+            </div>
+            <div class="form-group">
+              <label class="control-label">Enter a global core clock for this group</label>
+              <input ng-model="vm.input.core" type="text" pattern="^[0-9]*$" class="form-control" name="core" minlength="3" maxlength="4" placeholder="1000" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Enter a global memory clock for this group</label>
+              <input ng-model="vm.input.mem" type="text" pattern="^[0-9]*$" class="form-control" name="mem" minlength="3" maxlength="4" placeholder="1500" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Enter global power setting for this group (max 7 for RX series)</label>
+              <input ng-model="vm.input.power" type="text" pattern="^[0-9]*$" class="form-control" name="pwr" minlength="1" maxlength="2" placeholder="7" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Enter global fan setting for this group</label>
+              <input ng-model="vm.input.fan" type="text" pattern="^[0-9]*$" class="form-control" name="fan" minlength="2" maxlength="3" placeholder="75" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Maximum GPU temperature</label>
+              <input ng-model="vm.input.maxtemp" type="text" pattern="^[0-9]*$" class="form-control" name="maxtemp" minlength="2" maxlength="3" placeholder="85" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Sgminer ETH (x)Intensity</label>
+              <input ng-model="vm.input.sgintensity" type="text" pattern="^[0-9]*$" class="form-control" name="sgintensity" minlength="3" maxlength="4" placeholder="1024" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Sgminer XMR (raw)Intensity</label>
+              <input ng-model="vm.input.sgxmrintensity" type="text" pattern="^[0-9]*$" class="form-control" name="sgxmrintensity" minlength="3" maxlength="4" placeholder="1008" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Sgminer ETH worksize</label>
+              <input ng-model="vm.input.sgworksize" type="text" pattern="^[0-9]*$" class="form-control" name="sgworksize" minlength="2" maxlength="3" placeholder="256" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Sgminer XMR worksize</label>
+              <input ng-model="vm.input.sgxmrworksize" type="text" pattern="^[0-9]*$" class="form-control" name="sgxmrworksize" minlength="1" maxlength="2" placeholder="8" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Sgminer ETH GPU threads</label>
+              <input ng-model="vm.input.sgthreads" type="text" pattern="^[0-9]*$" class="form-control" name="sgthreads" minlength="1" maxlength="1" placeholder="1" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Sgminer XMR GPU threads</label>
+              <input ng-model="vm.input.sgxmrthreads" type="text" pattern="^[0-9]*$" class="form-control" name="sgxmrthreads" minlength="1" maxlength="1" placeholder="1" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Claymore ETH Intensity</label>
+              <input ng-model="vm.input.clayintensity" type="text" pattern="^[0-6]*$" class="form-control" name="clayintensity" minlength="1" maxlength="1" placeholder="4" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Claymore ZEC Intensity</label>
+              <input ng-model="vm.input.clayzecintensity" type="text" pattern="^[0-6]*$" class="form-control" name="clayzecintensity" minlength="1" maxlength="1" placeholder="4" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Group Claymore ZEC Miner Mode (1 is less intensitive, 0 is intensive)</label>
+              <input ng-model="vm.input.clayzecmode" type="text" pattern="^[0-1]*$" class="form-control" name="clayzecmode" minlength="1" maxlength="1" placeholder="1" data-error="Thats not a correct number" required>
+              <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group form-actions">
+							<button type="submit" class="btn btn-effect-ripple btn-primary" ng-disabled=" $ctrl.user.username === 'Test' ">Add</button>
+              <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <i class="fa fa-angle-right"></i> <a class="accordion-toggle" data-toggle="collapse" data-parent="#faq1" href="#faq1_q2"><strong>...</strong></a>
+        </div>
+      </div>
+      <div id="faq1_q2" class="panel-collapse collapse">
+        <div class="panel-body">
+          <p class="remove-margin"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

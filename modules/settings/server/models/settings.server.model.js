@@ -53,7 +53,30 @@ var SettingSchema = new Schema({
     mem: [String],
     fan: [String],
     pwr: [String],
-    name: [String]
+    name: [String],
+    group: [{
+      group: String,
+      miner: String,
+      proxypool1: String,
+      proxypool2: String,
+      proxywallet: String,
+      poolpass: String,
+      poolpass2: String,
+      core: Number,
+      mem: Number,
+      pwr: Number,
+      fan: Number,
+      maxgputemp: Number,
+      intensity: Number,
+      xmrintensity: Number,
+      worksize: Number,
+      xmrworksize: Number,
+      gputhreads: Number,
+      xmrgputhreads: Number,
+      clayintensity: Number,
+      clayzecintensity: Number,
+      clayzecmode: String
+    }]
   }
 });
 

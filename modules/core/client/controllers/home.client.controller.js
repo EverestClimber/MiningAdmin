@@ -149,11 +149,11 @@
           sub: [
             {
               name: 'Create Groups',
-              state: 'creategroups.php'
+              state: 'home.create-group'
             },
             {
               name: 'Manage Groups',
-              state: 'managegroups.php'
+              state: 'home.manage-group'
             }
           ]
         },
