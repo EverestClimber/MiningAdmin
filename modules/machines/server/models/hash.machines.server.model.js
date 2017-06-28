@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
- * Log Schema
+ * Hash Schema
  */
-var LogSchema = new Schema({
+var HashSchema = new Schema({
   user: {
     type: String,
     default: ''
@@ -18,9 +18,9 @@ var LogSchema = new Schema({
     type: String,
     default: ''
   },
-  log: {
-    type: String,
-    default: ''
+  hash: {
+    type: Number,
+    default: 0
   },
   updated: {
     type: Number,
@@ -28,4 +28,4 @@ var LogSchema = new Schema({
   }
 });
 
-mongoose.model('Log', LogSchema);
+mongoose.model('Hash', HashSchema);
