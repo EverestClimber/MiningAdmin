@@ -72,7 +72,7 @@
       GroupsService.deleteGroup(vm.user.username, vm.groups[index].name)
         .then(function() {
           vm.groups.splice(index, 1);
-          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> Delete the group successfully.`, title: '<i class="glyphicon glyphicon-ok"></i> Delete Group', delay: 6000 });
+          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Delete the group successfully.', title: '<i class="glyphicon glyphicon-ok"></i> Delete Group', delay: 6000 });
           vm.setTooltip();
         })
         .catch(function(err) {
@@ -85,7 +85,7 @@
 
       GroupsService.modifyGroup(vm.user.username, vm.groups[index].name, vm.groups[index].info)
         .then(function() {
-          Notification.success({ message: `<i class="glyphicon glyphicon-ok"></i> Successfully modified.`, title: '<i class="glyphicon glyphicon-ok"></i> Modify Group', delay: 6000 });
+          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Successfully modified.', title: '<i class="glyphicon glyphicon-ok"></i> Modify Group', delay: 6000 });
         })
         .catch(function(err) {
           Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Error!' });

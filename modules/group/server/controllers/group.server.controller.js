@@ -64,7 +64,7 @@ exports.update = function (req, res) {
   var groupName = req.params.groupName;
   var info = req.body.info;
 
- Group.findOne({ user: userName, name: groupName })
+  Group.findOne({ user: userName, name: groupName })
     .then(group => {
       group.updated = Date.now();
       group.info = req.body.info;
