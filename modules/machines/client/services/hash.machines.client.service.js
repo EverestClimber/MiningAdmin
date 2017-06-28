@@ -13,6 +13,7 @@
       read: {
         method: 'GET',
         url: '/api/hashes/:userName/:hostName',
+        isArray: true,
         params: {
           userName: '@userName',
           hostName: '@hostName'

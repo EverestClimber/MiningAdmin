@@ -141,7 +141,7 @@
           ng-class="machine.display.trClass" repeat-loaded="vm.setTooltip()" style='font-size: small;'>
 
             <td align="center" valign="middle">
-              <span class="success" data-toggle="tooltip" data-container="body" data-html="true" title="Active miner: {{ machine.display.miner }} <br>Group: {{ machine.display.group }} <br />Wallet: t1cesdj5WMe8K6tYKobNp1qufxWeMNSRJXt<br />Pool1: {{ machine.display.pool1 }}<br>Pool2: {{ machine.display.pool2 }}">
+              <span class="success" data-toggle="tooltip" data-container="body" data-html="true" title="Active miner: {{ machine.display.miner }} <br>Group: {{ machine.display.group }} <br />Wallet: {{ machine.display.wallet }}<br />Pool1: {{ machine.display.pool1 }}<br>Pool2: {{ machine.display.pool2 }}">
                 <a href="javascript:void(0)" ng-click="vm.openDialog('md', '.modal-parent', 'renameModalContent.html', 'RenameController', { machine: machine })" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-toggle="modal" data-target="#renameModal" class="danger">
                   {{ machine.info.hostname }}
                 </a>
@@ -186,7 +186,7 @@
             </td>
 
             <td align="center" valign="middle">
-              <a href="../generatechart.php?miner=" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-target="#chartModal" data-toggle="modal">
+              <a href="javascript:void(0)" ng-click="vm.openDialog('md', '.modal-parent', 'hashModalContent.html', 'HashController', { miner: machine.info.hostname })" class="btn btn-effect-ripple btn-dark-flat btn-xs" data-target="#chartModal" data-toggle="modal">
                 {{ machine.info.hash }} {{ machine.display.hashUnit }}
               </a>
             </td>
@@ -327,5 +327,19 @@
   <div class="modal-footer">
     <!-- <button type="button" class="btn btn-effect-ripple btn-danger" ng-click="$ctrl.clear()" ng-disabled=" $ctrl.user.username === 'Test' ">Clear Logs</button> -->
     <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()">Close</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="hashModalContent.html">
+  <div class="modal-header">
+      <button type="button" class="close" ng-click="$ctrl.cancel()" aria-hidden="true">&times;</button>
+       <h4 class="modal-title" id="modal-title">{{ $ctrl.miner }}</h4>
+  </div>
+  <div class="modal-body" id ="modal-body">
+    <canvas class="chart chart-line" chart-data="$ctrl.data" chart-labels="$ctrl.labels"
+    	chart-series="$ctrl.series" chart-click="$ctrl.onClick" chart-options="$ctrl.options"></canvas>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default pull-right" ng-click="$ctrl.cancel()">Close</button>
   </div>
 </script>

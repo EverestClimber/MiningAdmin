@@ -5,9 +5,9 @@
     .module('machines')
     .controller('MachinesController', MachinesController);
 
-  MachinesController.$inject = ['$scope', '$stateParams', '$timeout', 'MachinesService', 'LogsService', 'Authentication', 'Notification', '$uibModal', '$document'];
+  MachinesController.$inject = ['$scope', '$stateParams', '$timeout', 'MachinesService', 'LogsService', 'HashService', 'Authentication', 'Notification', '$uibModal', '$document'];
 
-  function MachinesController($scope, $stateParams, $timeout, MachinesService, LogsService, Authentication, Notification, $uibModal, $document) {
+  function MachinesController($scope, $stateParams, $timeout, MachinesService, LogsService, HashService, Authentication, Notification, $uibModal, $document) {
     var vm = this;
 
     vm.timeLimit = 300 * 1000; // 300 seconds
@@ -43,6 +43,7 @@
           vm.dashboard.hash.onlineCount += machines[i].hash;
           machines[i].online = true;
           vm.saveLog(machines[i]);
+          vm.saveHash(machines[i]);
 
         } else {
           // offline
@@ -291,6 +292,10 @@
 
     vm.saveLog = function(machine) {
       LogsService.newLogs(vm.user.username, machine.info.hostname, machine.info.miner_log);
+    };
+
+    vm.saveHash = function(machine) {
+      HashService.addHash(vm.user.username, machine.info.hostname, machine.info.hash);
     };
 
     vm.setTooltip = function() {

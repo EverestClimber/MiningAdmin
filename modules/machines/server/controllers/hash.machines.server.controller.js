@@ -14,22 +14,22 @@ var path = require('path'),
 exports.create = function (req, res) {
   var userName = req.params.userName;
   var hostName = req.params.hostName;
-  var hashValue = req.params.hash;
+  var hashValue = req.body.hash;
 
-  Hash.findOne({ user: userName, host: hostName }).sort('-hash')
+  Hash.findOne({ user: userName, host: hostName, hash: hashValue }).sort('-updated')
     .then(hash => {
-      if (hash) {
-        return res.json({ message: 'Same Value.' });
-      } else {
-        var newHash = new Hash({
-          user: userName,
-          host: hostName,
-          hash: hashValue,
-          updated: Date.now()
-        });
+      // if (hash) {
+        // return res.json({ message: 'Same Value.' });
+      // } else {
+      var newHash = new Hash({
+        user: userName,
+        host: hostName,
+        hash: hashValue,
+        updated: Date.now()
+      });
 
-        return newHash.save();
-      }
+      return newHash.save();
+      // }
     })
     .then(hash => {
       res.json({ message: 'Added.' });
