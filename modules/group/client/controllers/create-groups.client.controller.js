@@ -104,6 +104,7 @@
           group.clayzecintensity = input.clayzecintensity;
           group.clayzecmode = `mode ${input.clayzecmode}`;
 
+          if (!settings.group) settings.group = [];
           settings.group.push(group);
           vm.changeSettings('You have successfully added a new group');
         })

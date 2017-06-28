@@ -71,8 +71,15 @@
     vm.deleteGroup = function(index) {
       GroupsService.deleteGroup(vm.user.username, vm.groups[index].name)
         .then(function() {
+          var pat = new RegExp(`^${vm.groups[index].name}`);
+          for (let i = 0; i < vm.settings.info.group.length; i++) {
+            if (vm.settings.info.group[i].group.match(pat)) {
+              vm.settings.info.group.splice(i, 1);
+              break;
+            }
+          }
           vm.groups.splice(index, 1);
-          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Delete the group successfully.', title: '<i class="glyphicon glyphicon-ok"></i> Delete Group', delay: 6000 });
+          vm.changeSettings('Delete the group successfully');
           vm.setTooltip();
         })
         .catch(function(err) {
@@ -85,7 +92,40 @@
 
       GroupsService.modifyGroup(vm.user.username, vm.groups[index].name, vm.groups[index].info)
         .then(function() {
-          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Successfully modified.', title: '<i class="glyphicon glyphicon-ok"></i> Modify Group', delay: 6000 });
+          var pat = new RegExp(`^${vm.groups[index].name}`);
+          var i;
+          for (i = 0; i < vm.settings.info.group.length; i++) {
+            if (vm.settings.info.group[i].group.match(pat)) {
+
+              break;
+            }
+          }
+          var group = vm.settings.info.group[i];
+          var input = vm.groups[index].info;
+          group.group = `${input.groupname} ${input.grouprange}`;
+          group.miner = input.groupminer;
+          group.pool = input.grouppool;
+          group.proxypool1 = input.grouppool;
+          group.proxypool2 = input.grouppool2;
+          group.proxywallet = input.groupwallet;
+          group.poolpass = input.grouppass;
+          group.poolpass2 = input.grouppass2;
+          group.core = input.core;
+          group.mem = input.mem;
+          group.pwr = input.power;
+          group.fan = input.fan;
+          group.maxgputemp = input.maxtemp;
+          group.intensity = input.sgintensity;
+          group.xmrintensity = input.sgxmrintensity;
+          group.worksize = input.sgworksize;
+          group.xmrworksize = input.sgxmrworksize;
+          group.gputhreads = input.sgthreads;
+          group.xmrgputhreads = input.sgxmrthreads;
+          group.clayintensity = input.clayintensity;
+          group.clayzecintensity = input.clayzecintensity;
+          group.clayzecmode = `mode ${input.clayzecmode}`;
+
+          vm.changeSettings('Successfully modified');
         })
         .catch(function(err) {
           Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> Error!' });
