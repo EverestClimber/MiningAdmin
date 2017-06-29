@@ -51,6 +51,7 @@
           vm.dashboard.gpu.offlineCount += machines[i].gpu;
           vm.dashboard.hash.offlineCount += machines[i].hash;
           machines[i].online = false;
+
         }
 
         machines[i].display = vm.getDisplayInformation(machines[i]);
@@ -296,6 +297,10 @@
 
     vm.saveHash = function(machine) {
       HashService.addHash(vm.user.username, machine.info.hostname, machine.info.hash);
+    };
+
+    vm.clearHash = function(machine) {
+      HashService.clearHash(vm.user.username, machine.info.hostname, machine.info.hash);
     };
 
     vm.setTooltip = function() {

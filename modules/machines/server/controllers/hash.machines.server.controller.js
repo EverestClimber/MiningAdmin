@@ -16,11 +16,18 @@ exports.create = function (req, res) {
   var hostName = req.params.hostName;
   var hashValue = req.body.hash;
 
-  Hash.findOne({ user: userName, host: hostName, hash: hashValue }).sort('-updated')
+  Hash.findOne({ user: userName, host: hostName }).sort('-updated')
     .then(hash => {
-      // if (hash) {
-        // return res.json({ message: 'Same Value.' });
-      // } else {
+       if ((Date.now() - hash.updated) > 1000 * 10) {
+        Hash.remove({ user: userName, host: hostName })
+          .then(() => {})
+          .catch(err => {
+            return res.status(422).send({
+              message: errorHandler.getErrorMessage(err)
+            });
+          });
+      }
+
       var newHash = new Hash({
         user: userName,
         host: hostName,
@@ -29,7 +36,6 @@ exports.create = function (req, res) {
       });
 
       return newHash.save();
-      // }
     })
     .then(hash => {
       res.json({ message: 'Added.' });
@@ -53,6 +59,22 @@ exports.read = function (req, res) {
     .then(hash => {
       res.json(hash);
     })
+    .catch(err => {
+      return res.status(422).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    });
+};
+
+/**
+ * Clear a hash
+ */
+exports.clear = function (req, res) {
+  var userName = req.params.userName;
+  var hostName = req.params.hostName;
+
+  Hash.remove({ user: userName, host: hostName })
+    .then(() => res.json({ message: 'Hashes are cleared.' }))
     .catch(err => {
       return res.status(422).send({
         message: errorHandler.getErrorMessage(err)

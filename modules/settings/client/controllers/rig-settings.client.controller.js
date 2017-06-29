@@ -29,34 +29,6 @@
       return new Array(num);
     };
 
-    vm.init = function() {
-      $(`#${vm.state}-link`).click();
-
-      $('#settings-form').validator();
-
-      if (vm.params.gpus) vm.params.gpus = parseInt(vm.params.gpus, 10);
-      var cor = vm.coreRig().trim().split(' ');
-      var mem = vm.memRig().trim().split(' ');
-      var fan = vm.fanRig().trim().split(' ');
-      var power = vm.pwrRig().trim().split(' ');
-      vm.input.core = [];
-      vm.input.mem = [];
-      vm.input.fan = [];
-      vm.input.power = [];
-      for (let i = 0; i < vm.params.gpus; i++) {
-        vm.input.core[i] = cor[i];
-        vm.input.mem[i] = mem[i];
-        vm.input.fan[i] = fan[i];
-        vm.input.power[i] = power[i];
-      }
-    };
-
-    $scope.$on('$viewContentLoaded', function (event) {
-      // code that will be executed ...
-      // every time this view is loaded
-      vm.init();
-    });
-
     vm.settings = {
       info: {}
     };
@@ -87,7 +59,7 @@
     };
 
     vm.reboots = function() {
-      var reb = vm.settings.reb;
+      var reb = vm.settings.info.reb;
       var name = vm.params.mac;
       if (!name) {
         name = vm.params.miner;
@@ -113,7 +85,7 @@
 
     vm.coreRig = function() {
       var miner = vm.params.miner;
-      var cor = vm.settings.cor;
+      var cor = vm.settings.info.cor;
       var patt = new RegExp(`^${miner}(.*)`);
 
       if (!cor) return '';
@@ -133,9 +105,28 @@
       }
     };
 
+    vm.setCoreRig = function() {
+      var miner = vm.params.miner;
+      var patt = new RegExp(`^${miner}(.*)`);
+
+      if (!vm.settings.info.cor) {
+        vm.settings.info.cor = [];
+      }
+      var cor = vm.settings.info.cor;
+
+      var i;
+      for (i = 0; i < cor.length; i++) {
+        if (cor[i].match(patt)) {
+          break;
+        }
+      }
+
+      cor[i] = `${miner} ${vm.input.core[i]}`;
+    };
+
     vm.memRig = function() {
       var miner = vm.params.miner;
-      var mem = vm.settings.mem;
+      var mem = vm.settings.info.mem;
       var patt = new RegExp(`${miner}(.*)`);
 
       if (!mem) return '';
@@ -155,9 +146,28 @@
       }
     };
 
+    vm.setMemRig = function() {
+      var miner = vm.params.miner;
+      var patt = new RegExp(`^${miner}(.*)`);
+
+      if (!vm.settings.info.mem) {
+        vm.settings.info.mem = [];
+      }
+      var mem = vm.settings.info.mem;
+
+      var i;
+      for (i = 0; i < mem.length; i++) {
+        if (mem[i].match(patt)) {
+          break;
+        }
+      }
+
+      mem[i] = `${miner} ${vm.input.mem[i]}`;
+    };
+
     vm.fanRig = function() {
       var miner = vm.params.miner;
-      var fan = vm.settings.fan;
+      var fan = vm.settings.info.fan;
       var patt = new RegExp(`${miner}(.*)`);
 
       if (!fan) return '';
@@ -177,9 +187,28 @@
       }
     };
 
+    vm.setFanRig = function() {
+      var miner = vm.params.miner;
+      var patt = new RegExp(`^${miner}(.*)`);
+
+      if (!vm.settings.info.fan) {
+        vm.settings.info.fan = [];
+      }
+      var fan = vm.settings.info.fan;
+
+      var i;
+      for (i = 0; i < fan.length; i++) {
+        if (fan[i].match(patt)) {
+          break;
+        }
+      }
+
+      fan[i] = `${miner} ${vm.input.fan[i]}`;
+    };
+
     vm.pwrRig = function() {
       var miner = vm.params.miner;
-      var pwr = vm.settings.pwr;
+      var pwr = vm.settings.info.pwr;
       var patt = new RegExp(`${miner}(.*)`);
 
       if (!pwr) return '';
@@ -199,12 +228,70 @@
       }
     };
 
+    vm.setPowerRig = function() {
+      var miner = vm.params.miner;
+      var patt = new RegExp(`^${miner}(.*)`);
+
+      if (!vm.settings.info.pwr) {
+        vm.settings.info.pwr = [];
+      }
+      var pwr = vm.settings.info.pwr;
+
+      var i;
+      for (i = 0; i < pwr.length; i++) {
+        if (pwr[i].match(patt)) {
+          break;
+        }
+      }
+
+      pwr[i] = `${miner} ${vm.input.power[i]}`;
+    };
+
+    vm.setSettings = function($valid) {
+      // alert('settings');
+      vm.setCoreRig();
+      vm.setMemRig();
+      vm.setFanRig();
+      vm.setPowerRig();
+
+      vm.changeSettings('You have successfully changed settings.<br />To apply changes, please trigger a mass reboot.');
+    };
+
     vm.setReboots = function($valid) {
       if ($valid !== true) return;
 
       vm.settings.info.proxy_wallet = vm.input.wallet;
       vm.changeSettings('You have successfully changed global wallet.<br />To apply changes, please trigger a mass reboot.');
     };
+
+    vm.init = function() {
+      $(`#${vm.state}-link`).click();
+
+      $('#settings-form').validator();
+
+      if (vm.params.gpus) vm.params.gpus = parseInt(vm.params.gpus, 10);
+      console.log(vm.params.gpus);
+      var cor = vm.coreRig().trim().split(' ');
+      var mem = vm.memRig().trim().split(' ');
+      var fan = vm.fanRig().trim().split(' ');
+      var power = vm.pwrRig().trim().split(' ');
+      vm.input.core = [];
+      vm.input.mem = [];
+      vm.input.fan = [];
+      vm.input.power = [];
+      for (let i = 0; i < vm.params.gpus; i++) {
+        vm.input.core[i] = cor[i];
+        vm.input.mem[i] = mem[i];
+        vm.input.fan[i] = fan[i];
+        vm.input.power[i] = power[i];
+      }
+    };
+
+    $scope.$on('$viewContentLoaded', function (event) {
+      // code that will be executed ...
+      // every time this view is loaded
+      vm.init();
+    });
 
   }
 }());

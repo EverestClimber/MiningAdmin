@@ -9,5 +9,6 @@ module.exports = function (app) {
 
   app.route('/api/hashes/:userName/:hostName')
     .get(hashes.read)
-    .post(hashes.create);
+    .post(hashes.create)
+    .delete(hashes.clear);
 };

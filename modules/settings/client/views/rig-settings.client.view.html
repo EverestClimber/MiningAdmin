@@ -85,7 +85,7 @@
             </div>
             <div class="form-group has-feedback">
               <div ng-repeat="core in vm.input.core track by $index" class="col-sm-2">
-                GPU {{ $index }} : <input type="text" pattern="^[0-9]*$" class="form-control" ng-model="core" name="newCore[]" minlength="3" maxlength="4" placeholder="1000" data-error="Thats not a correct number" required>
+                GPU {{ $index }} : <input type="text" ng-model="vm.input.core[$index]" pattern="^[0-9]*$" class="form-control" name="newCore[]" minlength="3" maxlength="4" placeholder="1000" data-error="Thats not a correct number" required>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div class="help-block with-errors"></div>
               </div>
@@ -110,7 +110,7 @@
             </div>
             <div class="form-group has-feedback">
               <div ng-repeat="mem in vm.input.mem track by $index" class="col-sm-2">
-                GPU {{ $index }} : <input type="text" pattern="^[0-9]*$" class="form-control" ng-model="mem" name="newMem[]" minlength="3" maxlength="4" placeholder="1500" data-error="Thats not a correct number" required>
+                GPU {{ $index }} : <input type="text" ng-model="vm.input.mem[$index]" pattern="^[0-9]*$" class="form-control" name="newMem[]" minlength="3" maxlength="4" placeholder="1500" data-error="Thats not a correct number" required>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div class="help-block with-errors"></div>
               </div>
@@ -135,7 +135,7 @@
             </div>
             <div class="form-group has-feedback">
               <div ng-repeat="fan in vm.input.fan track by $index" class="col-sm-2">
-                GPU {{ $index }} : <input type="text" pattern="^[0-9]*$" class="form-control" ng-model="fan" name="newFan[]" minlength="2" maxlength="3" placeholder="75" data-error="Thats not a correct number" required>
+                GPU {{ $index }} : <input ng-model="vm.input.fan[$index]" type="text" pattern="^[0-9]*$" class="form-control" name="newFan[]" minlength="2" maxlength="3" placeholder="75" data-error="Thats not a correct number" required>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div class="help-block with-errors"></div>
               </div>
@@ -160,7 +160,7 @@
             </div>
             <div class="form-group has-feedback">
               <div ng-repeat="power in vm.input.power track by $index" class="col-sm-2">
-                GPU {{ $index }} : <input type="text" pattern="^[0-9]*$" class="form-control" ng-model="power" name="newPower[]" minlength="1" maxlength="2" placeholder="7" data-error="Thats not a correct number" required>
+                GPU {{ $index }} : <input ng-model="vm.input.power[$index]" type="text" pattern="^[0-9]*$" class="form-control" name="newPower[]" minlength="1" maxlength="2" placeholder="7" data-error="Thats not a correct number" required>
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                 <div class="help-block with-errors"></div>
               </div>
@@ -170,7 +170,7 @@
             </div>
             <div class="form-group form-actions">
               <div class="col-sm-4">
-                <button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2" ng-disabled=" vm.user.username === 'Test' ">Submit</button>
+                <button type="submit" class="btn btn-effect-ripple btn-primary disabled disabled2">Submit</button>
                 <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
               </div>
             </div>

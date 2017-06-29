@@ -45,7 +45,7 @@
           }
         ]
       }
-    }
+    };
 
     vm.init = function() {
       // $('#rename-form').validator();
@@ -56,7 +56,7 @@
         [0, 0]
       ];
       vm.onClick = function (points, evt) {
-        //console.log(points, evt);
+        // console.log(points, evt);
       };
 
       // Simulate async data update

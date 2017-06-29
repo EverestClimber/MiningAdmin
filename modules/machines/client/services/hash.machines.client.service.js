@@ -26,6 +26,14 @@
           userName: '@userName',
           hostName: '@hostName'
         }
+      },
+      clear: {
+        method: 'DELETE',
+        url: '/api/hashes/:userName/:hostName',
+        params: {
+          userName: '@userName',
+          hostName: '@hostName'
+        }
       }
     });
 
@@ -35,6 +43,9 @@
       },
       addHash: function(userName, hostName, hash) {
         return this.add({ userName: userName, hostName: hostName }, { hash: hash }).$promise;
+      },
+      clearHash: function(userName, hostName) {
+        return this.clear({ userName: userName, hostName: hostName }).$promise;
       }
     });
 
