@@ -271,10 +271,7 @@
       $('#settings-form').validator();
 
       if (vm.params.gpus) vm.params.gpus = parseInt(vm.params.gpus, 10);
-      console.log(vm.params.gpus);
-      console.log(vm.coreRig());
       var cor = vm.coreRig().trim().split(' ');
-      console.log(cor);
       var mem = vm.memRig().trim().split(' ');
       var fan = vm.fanRig().trim().split(' ');
       var power = vm.pwrRig().trim().split(' ');
