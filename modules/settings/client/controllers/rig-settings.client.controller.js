@@ -36,6 +36,7 @@
     SettingsService.getSetting(vm.user.username)
       .then(function(settings) {
         vm.settings = settings;
+        vm.init();
       })
       .catch(function(err) {
         Notification.error({ message: err.data.message, title: '<i class="glyphicon glyphicon-remove"></i> No Setting!' });
@@ -121,7 +122,7 @@
         }
       }
 
-      cor[i] = `${miner} ${vm.input.core[i]}`;
+      cor[i] = `${miner} ${vm.input.core.join(' ')}`;
     };
 
     vm.memRig = function() {
@@ -162,7 +163,7 @@
         }
       }
 
-      mem[i] = `${miner} ${vm.input.mem[i]}`;
+      mem[i] = `${miner} ${vm.input.mem.join(' ')}`;
     };
 
     vm.fanRig = function() {
@@ -203,7 +204,7 @@
         }
       }
 
-      fan[i] = `${miner} ${vm.input.fan[i]}`;
+      fan[i] = `${miner} ${vm.input.fan.join(' ')}`;
     };
 
     vm.pwrRig = function() {
@@ -244,7 +245,7 @@
         }
       }
 
-      pwr[i] = `${miner} ${vm.input.power[i]}`;
+      pwr[i] = `${miner} ${vm.input.power.join(' ')}`;
     };
 
     vm.setSettings = function($valid) {
@@ -271,7 +272,9 @@
 
       if (vm.params.gpus) vm.params.gpus = parseInt(vm.params.gpus, 10);
       console.log(vm.params.gpus);
+      console.log(vm.coreRig());
       var cor = vm.coreRig().trim().split(' ');
+      console.log(cor);
       var mem = vm.memRig().trim().split(' ');
       var fan = vm.fanRig().trim().split(' ');
       var power = vm.pwrRig().trim().split(' ');
@@ -290,7 +293,7 @@
     $scope.$on('$viewContentLoaded', function (event) {
       // code that will be executed ...
       // every time this view is loaded
-      vm.init();
+      // vm.init();
     });
 
   }

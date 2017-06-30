@@ -18,14 +18,16 @@ exports.create = function (req, res) {
 
   Hash.findOne({ user: userName, host: hostName }).sort('-updated')
     .then(hash => {
-       if ((Date.now() - hash.updated) > 1000 * 10) {
-        Hash.remove({ user: userName, host: hostName })
-          .then(() => {})
-          .catch(err => {
-            return res.status(422).send({
-              message: errorHandler.getErrorMessage(err)
+      if (hash) {
+        if ((Date.now() - hash.updated) > 1000 * 10) {
+          Hash.remove({ user: userName, host: hostName })
+            .then(() => {})
+            .catch(err => {
+              return res.status(422).send({
+                message: errorHandler.getErrorMessage(err)
+              });
             });
-          });
+        }
       }
 
       var newHash = new Hash({
